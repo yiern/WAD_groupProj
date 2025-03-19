@@ -25,13 +25,14 @@
         {% if courses %}
             <ul>
                 {% for course in courses %}<!--here shows the notes-->
-                    <li>{{course.CourseName}}</li>
+                    <li><a href = "{% url 'rango:tNnotes' course.CourseID %}">{{course.CourseName}}</a></li>
                 {% endfor %}
             </ul>
         {% else %}
             <strong>There are no notes present.</strong>
         {% endif %}
     </div>
+   
     <br>
 {% endblock %}
 

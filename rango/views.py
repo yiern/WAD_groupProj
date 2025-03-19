@@ -1,11 +1,16 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+import os
+from django.shortcuts import get_object_or_404, render
+from django.http import FileResponse, HttpResponse
 from rango.forms import *
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from docx2pdf import convert
+from django.contrib import messages 
+from tango_with_django_project import settings
+
 
 @login_required
 def restricted(request):
@@ -33,6 +38,7 @@ def index(request):
     return response
 
 def tNindex(request):
+
     courses = Courses.objects.all()
     notes = Note.objects.all()
 
@@ -70,9 +76,34 @@ def tNlogin(request):
     
         return render(request, 'rango/tNlogin.html')
    
+def serve_docx(request, NoteID):
+    # Fetch the note object
+    note = get_object_or_404(Note, NoteID=NoteID)
+    
+    # Construct the file path
+    file_path = os.path.join(settings.MEDIA_ROOT, note.file.name)
+    
+    # Serve the file with the correct headers
+    if os.path.exists(file_path):
+        response = FileResponse(open(file_path, 'rb'))
+        response['Content-Type'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        response['Content-Disposition'] = f'inline; filename="{os.path.basename(file_path)}"'
+        return response
+    else:
+        return HttpResponse("File not found", status=404)
 
-def tNnote(request):
-    return render(request, 'rango/tNnote.html')
+def tNnote(request,NoteID):
+
+    
+    note = Note.objects.get(NoteID = NoteID)
+
+    return render(request, 'rango/tNnote.html', {'note': note})
+
+def tNnotes(request,CourseID):
+
+    notes_from_course = Note.objects.filter(CourseID = CourseID)
+
+    return render(request, 'rango/tNnotes.html', {'course_notes':notes_from_course})
 
 def tNregister(request):
     registered = False
@@ -113,19 +144,16 @@ def tNsearch(request):
 
 @login_required
 def tNupload(request):
-    if request.method == 'POST':
-        form = NoteForm(request.POST, request.FILES)  # Include request.FILES for file uploads
-        if form.is_valid():
+    form = NoteForm(request.POST, request.FILES, user=request.user.students)  # request.user.students is the Students instance
+    if form.is_valid():
+        form.save()  # Save the form with the user field set
+        messages.success(request, 'File uploaded successfully!')  # Add a success message
 
-            form.save(commit = False) 
-            form.UserID = request.user
-            form.save()
-            return redirect('success_url')  
-        
+        return redirect('rango:tNupload')  # Redirect to the index page after successful upload
     else:
-        form = NoteForm()  # Render an empty form for GET requests
+        # Render an empty form for GET requests
+        form = NoteForm(user=request.user.students)
 
-    #return render(request, 'upload_note.html', {'form': form})
     return render(request, 'rango/tNupload.html', {'form': form})
 
 def tNuser(request):

@@ -12,7 +12,7 @@
         {% if notes %}
             <ul>
                 {% for note in notes %}<!--Here shows the notes-->
-                    <li><a href = "/rango/tNnote/{{note.NoteID}}">{{note.Topics}}</a></li>
+                    <li><a href = "{% url 'rango:tNnote' note.NoteID %}">{{note.Topics}}</a></li>
                 {% endfor %}
             </ul>
         {% else %}

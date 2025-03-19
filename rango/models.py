@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 
     
 class Students(models.Model):
-
     YearEnrolled = models.IntegerField()
     CurrentYearStudent = models.IntegerField(default= 1)
     user = models.OneToOneField(User, on_delete= models.CASCADE)
