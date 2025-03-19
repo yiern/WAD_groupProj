@@ -1,0 +1,23 @@
+{% extends 'rango/tNbase.html' %}
+<!DOCTYPE html>
+
+{% block header_block %}
+    <h1>My Profile</h1>
+{% endblock %}
+
+{% block body_block %}
+      
+    <div>
+        <h2>My Notes</h2>
+        {% if notes %}
+            <ul>
+                {% for note in notes %}<!--Here shows the notes-->
+                    <li><a href = "/rango/tNnote/{{note.NoteID}}">{{note.Topics}}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            You have not upload any notes yet.
+        {% endif %}
+    </div>
+{% endblock %}
+

@@ -1,0 +1,69 @@
+{% extends 'rango/tNbase.html' %}
+<!DOCTYPE html>
+
+{% block title_block %}
+    Register
+{% endblock %}
+
+{% block header_block %}
+    <h1>User Register</h1>    
+{% endblock %}
+
+{% block body_block %}
+    
+    <div><!--Register function-->
+        {% if registered %}
+            <strong>thank you for registering!</strong>
+            <br>
+            <a href="/rango/">Return to the homepage.</a>
+        {% else %}
+            <form id = "user_form" method="post" action="{% url 'rango:tNregister' %}" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                <!-- User Form Fields -->
+                <div class="form-group">
+                    <label for="{{ user_form.username.id_for_label }}">Username:</label>
+                    {{ user_form.username }}
+                    {% if user_form.username.errors %}
+                        <div class="error">{{ user_form.username.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ user_form.email.id_for_label }}">Email:</label>
+                    {{ user_form.email }}
+                    {% if user_form.email.errors %}
+                        <div class="error">{{ user_form.email.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ user_form.password.id_for_label }}">Password:</label>
+                    {{ user_form.password }}
+                    {% if user_form.password.errors %}
+                        <div class="error">{{ user_form.password.errors }}</div>
+                    {% endif %}
+                </div>
+               
+                <div class="form-group">
+                    <label for="{{ students_form.YearEnrolled.id_for_label }}">Year Enrolled:</label>
+                    {{ students_form.YearEnrolled }}
+                    {% if students_form.YearEnrolled.errors %}
+                        <div class="error">{{ students_form.YearEnrolled.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ students_form.CurrentYearStudent.id_for_label }}">Current Year:</label>
+                    {{ students_form.CurrentYearStudent }}
+                    {% if students_form.CurrentYearStudent.errors %}
+                        <div class="error">{{ students_form.CurrentYearStudent.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <input type="submit" name="submit" value="Register" />
+            </form>
+        {% endif %}
+    </div>
+
+{% endblock %}

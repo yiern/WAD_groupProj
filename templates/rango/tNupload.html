@@ -1,0 +1,45 @@
+{% extends 'rango/tNbase.html' %}
+<!DOCTYPE html>
+
+{% block title_block %}
+    Upload
+{% endblock %}
+
+{% block header_block %}
+    <h1>Upload</h1>
+{% endblock %}
+
+{% block body_block %}
+      
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    
+        <div class="form-group">
+            <label for="{{ form.CourseID.id_for_label }}">Course ID:</label>
+            {{ form.CourseID }}
+            {% if form.CourseID.errors %}
+                <div class="error">{{ form.CourseID.errors }}</div>
+            {% endif %}
+        </div>
+    
+        <div class="form-group">
+            <label for="{{ form.Topics.id_for_label }}">Topics:</label>
+            {{ form.Topics }}
+            {% if form.Topics.errors %}
+                <div class="error">{{ form.Topics.errors }}</div>
+            {% endif %}
+        </div>
+    
+        <div class="form-group">
+            <label for="{{ form.file.id_for_label }}">File:</label>
+            {{ form.file }}
+            {% if form.file.errors %}
+                <div class="error">{{ form.file.errors }}</div>
+            {% endif %}
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+
+{% endblock %}
+
