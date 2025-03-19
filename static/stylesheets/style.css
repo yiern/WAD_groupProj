@@ -1,0 +1,111 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styling */
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.navbar a:hover {
+    background: #575757;
+}
+
+/* Login Form */
+.form-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    background: #5cb85c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background: #4cae4c;
+}
+
+/* Dashboard */
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #fff;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+/* Search Bar */
+.search-box {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.search-box input {
+    width: 60%;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.search-box button {
+    padding: 10px;
+    background: #428bca;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background: #3071a9;
+}
