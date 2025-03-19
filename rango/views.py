@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import UploadNoteForm
 
-from rango.models import Category, Page, Note, Course, Enrollment
+from rango.models import Category, Page, Note, Courses, Enrolls
 from rango.forms import CategoryForm,PageForm, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
@@ -198,7 +198,7 @@ def search_notes(request):
     return render(request, 'rango/search_results.html', {'notes': notes, 'query': query})
 
 def list_courses(request):
-    courses = Course.objects.all()
+    courses = Courses.objects.all()
     return render(request, 'rango/courses.html', {'courses': courses})
 
 @login_required
@@ -206,11 +206,11 @@ def list_courses(request):
 def enroll_course(request):
     if request.method == 'POST':
         course_id = request.POST.get('course_id')
-        course = get_object_or_404(Course, course_id=course_id)
-        Enrollment.objects.get_or_create(student=request.user, course=course)
+        course = get_object_or_404(Courses, course_id=course_id)
+        Enrolls.objects.get_or_create(student=request.user, course=course)
         return redirect('courses')
 
-    return render(request, 'rango/enroll.html', {'courses': Course.objects.all()})
+    return render(request, 'rango/enroll.html', {'courses': Courses.objects.all()})
 
 @login_required
 def user_profile(request):
