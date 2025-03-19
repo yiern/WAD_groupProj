@@ -1,12 +1,16 @@
 from django.conf import settings
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
-from django.urls import reverse 
-from rango.models import Category,Page
+from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from .forms import UploadNoteForm
+
+from rango.models import Category, Page, Note, Course, Enrollment
 from rango.forms import CategoryForm,PageForm, UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+
 
 def index(request):
 	#queries category class from model and order them by likes, first 5 
@@ -167,6 +171,61 @@ def restricted(request):
 def user_logout(request):
 	logout(request)
 	return redirect(reverse('rango:index'))
+
+@login_required
+@csrf_exempt
+def upload_note(request):
+    if request.method == 'POST':
+        form = UploadNoteForm(request.POST, request.FILES)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.owner = request.user
+            note.save()
+            return redirect('notes')
+    else:
+        form = UploadNoteForm()
+
+    return render(request, 'rango/upload_note.html', {'form': form})
+
+@login_required
+def list_notes(request):
+    notes = Note.objects.all()
+    return render(request, 'rango/notes.html', {'notes': notes})
+
+def search_notes(request):
+    query = request.GET.get('query', '')
+    notes = Note.objects.filter(topics__icontains=query)
+    return render(request, 'rango/search_results.html', {'notes': notes, 'query': query})
+
+def list_courses(request):
+    courses = Course.objects.all()
+    return render(request, 'rango/courses.html', {'courses': courses})
+
+@login_required
+@csrf_exempt
+def enroll_course(request):
+    if request.method == 'POST':
+        course_id = request.POST.get('course_id')
+        course = get_object_or_404(Course, course_id=course_id)
+        Enrollment.objects.get_or_create(student=request.user, course=course)
+        return redirect('courses')
+
+    return render(request, 'rango/enroll.html', {'courses': Course.objects.all()})
+
+@login_required
+def user_profile(request):
+    return render(request, 'rango/profile.html', {'user': request.user})
+
+@login_required
+@csrf_exempt
+def edit_profile(request):
+    if request.method == 'POST':
+        request.user.email = request.POST.get('email', request.user.email)
+        request.user.university = request.POST.get('university', request.user.university)
+        request.user.save()
+        return redirect('profile')
+
+    return render(request, 'rango/edit_profile.html', {'user': request.user})
 
 def visitor_cookie_handler(request):
 

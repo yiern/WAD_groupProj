@@ -1,5 +1,5 @@
 from django import forms
-from rango.models import Page,Category,Note
+from rango.models import Page, Category, Note, Courses
 from urllib.parse import quote
 from django.contrib.auth.models import User
 from rango.models import UserProfile
@@ -51,13 +51,17 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('website','picture')
 
-class UploadNote(forms.ModelForm):
-    
-    CourseID = forms.CharField(max_length=max_length, help_text= "Enter your Course ID")
-    Topics = forms.CharField(max_length=max_length, help_text= "what's your note about?")
-    
+class UploadNoteForm(forms.ModelForm):
+    course = forms.ModelChoiceField(
+        queryset=Courses.objects.all(),
+        help_text="Select your course"
+    )
+    topics = forms.CharField(
+        max_length=max_length,
+        help_text="What's your note about?"
+    )
+    file = forms.FileField(help_text="Upload your note file")
+
     class Meta:
         model = Note
-        fields = ('file',)
-        exclude = ('UserID', 'DateUploaded','ID')
-
+        fields = ('course', 'topics', 'file')

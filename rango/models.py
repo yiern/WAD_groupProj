@@ -90,5 +90,3 @@ class EditedNotes(models.Model):
     NoteID = models.ForeignKey(Note, on_delete=models.CASCADE)
     file = models.FileField(upload_to = "Edited_Note/", null= True)
 
- 
- 
