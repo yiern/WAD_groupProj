@@ -1,0 +1,105 @@
+
+
+#slogan {
+    font-size: 18px;
+    font-family: Georgia, serif;
+    text-align: center;
+    margin: auto;
+}
+
+.sideBar {
+    width: 250px; /* Fixed width for the sidebar */
+    background-color: #c4d7d6; /* Light background color */
+    padding: 20px; /* Add some padding */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Add a shadow for separation */
+    height: 100vh; /* Full height of the viewport */
+    position: fixed; /* Fix the sidebar to the right */
+    right: 0; /* Position it on the right */
+    top: 100px; /* Align it to the top */
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    z-index: 500;
+    color:#485b4d;
+    
+}
+
+.sideBar ul {
+    padding-left: 10px; /* Remove default padding */
+}
+
+.sideBar ul li {
+    margin: 10px 0; /* Add some spacing between list items */
+}
+
+.listTitle {
+    color:#485b4d;
+    padding-bottom: 0;
+}
+
+.mainContent {
+    padding-left: 20px;
+    font-size: 20px;
+    padding-bottom: 60px;
+}
+
+.indexContent {
+    text-align: center;
+    width:calc(100vw - 320px);
+    max-width: 2000px;
+    padding: 10px;
+}
+.indexContent pre {
+    text-align:left;
+    max-width: 100%; /* Ensure the pre element doesn't exceed its container's width */
+    white-space: pre-wrap; /* Allow text to wrap */
+    word-wrap: break-word; /* Break long words if necessary */
+    overflow-x: auto; /* Add horizontal scrollbar only if needed */
+    padding: 10px; /* Optional: Add some padding */
+}
+
+.funcNeedLogin a{
+    padding-left: 20px;
+    font-size: 20px;
+    color: #134857;
+    font-weight: bold;
+}
+
+#notesContent{
+    display: flex; /* Enable Flexbox */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    margin: 0; /* Remove default margin */
+    padding: 0;
+}
+
+#notesContent ul {
+    
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    text-align: left; /* Center the text inside the list */
+    font-size: 20px;
+}
+
+#noteEditUpload {
+    height:130px;
+    width: 200px;
+    top: 600px;
+    
+}
+#noteEditUpload ul{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.noteText {
+    display:flex;
+    flex-direction: column; /* Stack children vertically */
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border: 2px solid #648e93;
+    padding-bottom: 30px;
+    margin-bottom: 200px;
+}
