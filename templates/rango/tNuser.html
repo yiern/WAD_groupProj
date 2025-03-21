@@ -18,6 +18,16 @@
         {% else %}
             You have not upload any notes yet.
         {% endif %}
+        <h2>My Edits</h2>
+        {% if edits %}
+            <ul>
+                {% for edit in edits %}
+                    
+                {% endfor %}
+            </ul>
+        {% else %}
+            No Notes has been edited
+        {% endif %}
     </div>
 {% endblock %}
 

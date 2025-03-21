@@ -22,13 +22,10 @@ class EnrollsAdmin(admin.ModelAdmin):
 
 @admin.register(Note)
 class NoteAdmin(admin.ModelAdmin):
-    list_display = ('user', 'CourseID', 'Topics', 'DateUploaded')
-    search_fields = ('user__username', 'CourseID__CourseID', 'Topics')
+    list_display = ('user','user_id', 'CourseID', 'Topics', 'DateUploaded',"NoteID",'edited')
+    search_fields = ('user__username', 'CourseID__CourseID', 'Topics',"NoteID",'edited')
 
-@admin.register(EditedNotes)
-class EditedNotesAdmin(admin.ModelAdmin):
-    list_display = ('user', 'CourseID', 'NoteID', 'DateUploaded')
-    search_fields = ('user__username', 'CourseID__CourseID', 'NoteID__NoteID')
+
 
 
 

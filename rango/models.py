@@ -32,12 +32,6 @@ class Note(models.Model):
     Topics = models.CharField(max_length=200)
     NoteID = models.AutoField(primary_key=True)
     file = models.FileField(upload_to="Documents/")
-
-class EditedNotes(models.Model):
-    user = models.ForeignKey(Students, on_delete=models.CASCADE)
-    DateUploaded = models.DateField(auto_now_add=True)
-    CourseID = models.ForeignKey(Courses, on_delete=models.CASCADE)
-    NoteID = models.ForeignKey(Note, on_delete=models.CASCADE)
-    file = models.FileField(upload_to = "Edited_Note/", null= True)
+    edited = models.IntegerField(null = True)
 
  

@@ -139,28 +139,63 @@ def tNregister(request):
                   context={'user_form': user_form,
                            'students_form': students_form,
                            'registered': registered})
+
 def tNsearch(request):
     return render(request, 'rango/tNsearch.html')
 
 @login_required
-def tNupload(request):
-    form = NoteForm(request.POST, request.FILES, user=request.user.students)  # request.user.students is the Students instance
-    if form.is_valid():
-        form.save()  # Save the form with the user field set
-        messages.success(request, 'File uploaded successfully!')  # Add a success message
+def tNupload(request, NoteID = None):
 
-        return redirect('rango:tNupload')  # Redirect to the index page after successful upload
+    if request.method == 'POST':
+        # Print the contents of request.POST and request.FILES
+        
+        if NoteID is not None:
+            edit = True
+            creator = Note.objects.get(NoteID = NoteID)
+            form = NoteForm(request.POST, request.FILES, user=request.user.students, edited=NoteID, CourseID = creator.CourseID,)  # request.user.students is the Students instance
+
+        else:
+            edit = False
+            creator = None
+            form = NoteForm(request.POST, request.FILES, user=request.user.students, edited=NoteID)  # request.user.students is the Students instance
+
+        
+        if form.is_valid():
+            
+            form.save()  # Save the form with the user field set
+            messages.success(request, 'File uploaded successfully!')  # Add a success message
+
+            return redirect('rango:tNupload')  # Redirect to the index page after successful upload
+        else:
+
+            # Render an empty form for GET requests
+            form = NoteForm(user=request.user.students)
+            messages.error(request, 'File not uploaded successfully')  # Add a success message
+        print("POST data:", request.POST)
+        print("FILES data:", request.FILES)
     else:
-        # Render an empty form for GET requests
-        form = NoteForm(user=request.user.students)
+        if NoteID is not None:
+            edit = True
+            creator = get_object_or_404(Note, NoteID=NoteID)
+            form = NoteForm(user=request.user.students, edited=creator.user, CourseID=creator.CourseID)
+        else:
+            edit = False
+            creator = None
+            form = NoteForm(user=request.user.students)
 
-    return render(request, 'rango/tNupload.html', {'form': form})
+    
+    return render(request, 'rango/tNupload.html', {'form': form, 'edit':edit, 'creator' : creator})
 
 def tNuser(request):
-    notes = Note.objects.all()
+    
+    notes = Note.objects.filter(user = request.user.id)
 
-    return render(request, 'rango/tNuser.html', {'notes':notes})
+    return render(request, 'rango/tNuser.html', {'notes':notes,})
 
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('rango:tNindex'))
 
 
 def about(request):
