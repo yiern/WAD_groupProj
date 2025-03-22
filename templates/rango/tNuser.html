@@ -7,7 +7,7 @@
 
 {% block body_block %}
       
-    <div>
+    <div id="notesContent">
         <h2>My Notes</h2>
         {% if notes %}
             <ul>
@@ -16,8 +16,9 @@
                 {% endfor %}
             </ul>
         {% else %}
-            You have not upload any notes yet.
+            <p>You have not upload any notes yet.</p>
         {% endif %}
+        <br>
         <h2>My Edits</h2>
         {% if edits %}
             <ul>
@@ -26,7 +27,7 @@
                 {% endfor %}
             </ul>
         {% else %}
-            No Notes has been edited
+            <p>No Notes has been edited</p>
         {% endif %}
     </div>
 {% endblock %}

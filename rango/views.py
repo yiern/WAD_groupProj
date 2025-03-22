@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from docx2pdf import convert
+#from docx2pdf import convert
 from django.contrib import messages 
 from tango_with_django_project import settings
 

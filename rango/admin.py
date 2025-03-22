@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import *
 from rango.models import *
 
+
 # Register the Students model
 @admin.register(Students)
 class StudentsAdmin(admin.ModelAdmin):
