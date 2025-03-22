@@ -19,10 +19,10 @@
 
 {% block body_block %}
       
-    <div>
+    <div id="notesContent">
 
         {% if searchResults%}
-            <h3>Maybe you want to find: </h3>
+            <h2>Maybe you want to find: </h2>
             <br>
             <ul>
                 {% for searchResult in searchResults %}
@@ -30,7 +30,7 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <strong>No results found.</strong>
+            <p><strong>No results found.</strong></p>
         {% endif %}       
     </div>
     

@@ -64,13 +64,17 @@
     font-weight: bold;
 }
 
-#notesContent{
+#notesContent {
     display: flex; /* Enable Flexbox */
     flex-direction: column; /* Stack children vertically */
     justify-content: center; /* Center horizontally */
     align-items: center;
     margin: 0; /* Remove default margin */
     padding: 0;
+}
+#notesContent h2{
+    color:#485b4d;
+    font-size: 24px;
 }
 
 #notesContent ul {
@@ -103,3 +107,4 @@
     padding-bottom: 30px;
     margin-bottom: 200px;
 }
+
