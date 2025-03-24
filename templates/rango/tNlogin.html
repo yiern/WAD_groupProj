@@ -6,20 +6,29 @@
 {% endblock %}
 
 {% block header_block %}
-    <h1>User Login</h1>    
+    <h1 id="tNicon">Login to <strong>Think</strong><em>Note</em></h1>    
 {% endblock %}
 
 {% block body_block %}
     
-    <div><!--Login function-->
-        <h1>Login to ThinkNote</h1>
+    <div id="uploadFunc">
+        
         <form id="login_form" method="post" action="{% url 'rango:tNlogin' %}">
         {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" />
-            <br />
-            Password: <input type="password" name="password" value="" size="50" />
-            <br />
-            <input type="submit" value="submit" />
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                <input type="text" id="id_username" name="username" size="50" />
+            </div>
+            <div class="form-group">
+                <label for="id_password">Password:</label>
+                <input type="password" id="id_password" name="password" size="50" />
+            </div>
+            
+            <div class="button">
+                <input type="submit" value="Submit" />
+            </div>
+            
+
         </form>
     </div>
 
