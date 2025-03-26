@@ -6,12 +6,12 @@
 {% endblock %}
 
 {% block header_block %}
-    <h1 id="tNicon">Login to <strong>Think</strong><em>Note</em></h1>    
+    <h1 class="tNicon">Login to <strong>Think</strong><em>Note</em></h1>    
 {% endblock %}
 
 {% block body_block %}
     
-    <div id="uploadFunc">
+    <div class="formFunc">
         
         <form id="login_form" method="post" action="{% url 'rango:tNlogin' %}">
         {% csrf_token %}

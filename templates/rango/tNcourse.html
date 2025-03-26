@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block body_block %}
-    <div id="notesContent">
+    <div class="pageContent">
         <div>
             <h2 class="listTitle">Explore Different Courses!</h2>
             {% if courses %}
@@ -25,7 +25,7 @@
             {% endif %}
         </div>
         <br>
-        <div class="funcNeedLogin">
+        <div id="uploadNeedLogin">
             {% if user.is_authenticated %}
                 <a href = "{% url 'rango:tNupload' %}">Upload a note</a>
             {% else %}

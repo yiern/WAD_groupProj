@@ -1,4 +1,4 @@
-#uploadFunc {
+.formFunc {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -6,7 +6,7 @@
     height: 100vh;
 }
 
-#uploadFunc form {
+.formFunc form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,7 +17,7 @@
     border-radius: 8px;
 }
 
-#uploadFunc .form-group {
+.formFunc .form-group {
     width: 100%;
     max-width: 500px;
     margin-bottom: 15px;
@@ -25,29 +25,29 @@
     background-color: var(--background-lightblue);
 }
 
-#uploadFunc label {
+.formFunc label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
     background-color: var(--background-lightblue);
 }
 
-#uploadFunc input,
-#uploadFunc select,
-#uploadFunc textarea {
+.formFunc input,
+.formFunc select,
+.formFunc textarea {
     width: 90%;
     padding: 8px;
     border: 1px solid #869d9d;
     border-radius: 4px;
 }
 
-#uploadFunc button {
+.formFunc button {
     align-self: center;
     margin-top: 10px;
     padding: 10px 20px;
 }
 
-#uploadFunc label {
+.formFunc label {
     text-align: left;
     width: 90%;
     margin-bottom: 4px;

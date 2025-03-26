@@ -4,6 +4,7 @@
     --background-blue: #c3d7df;
     --background-lightblue: #c4d7d6;
     --link-yellow: #FBCA04;
+    --footer-green: #638269;
 }
 
 *, *::before, *::after {
@@ -36,6 +37,7 @@ ul {
 }
 
 a{
+    color: inherit;
     text-decoration:none;
 }
 
@@ -51,13 +53,13 @@ a{
     z-index: 1000;
 }
 
-#tNicon{
+.tNicon{
     font-size: 28px;
 }
-#tNicon strong{
+.tNicon strong{
     color: #9388bb;
 }
-#tNicon em{
+.tNicon em{
     color: #6e8b74;
 }
 
@@ -81,6 +83,10 @@ a{
     z-index: 999;
     color: var(--pur-blue-black);
 }
+.footer ul{
+    padding-left: 30px;
+    color: var(--footer-green);
+}
 .footer a{
-    color: #638269;
+    color: var(--footer-green);
 }

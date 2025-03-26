@@ -31,19 +31,20 @@
     padding-bottom: 0;
 }
 
+/*???*/
 .mainContent {
     padding-left: 20px;
     font-size: 20px;
     padding-bottom: 60px;
 }
 
-.indexContent {
+#indexContent {
     text-align: center;
     width:calc(100vw - 320px);
     max-width: 2000px;
     padding: 10px;
 }
-.indexContent pre {
+#indexContent pre {
     text-align:left;
     max-width: 100%;
     white-space: pre-wrap;
@@ -52,14 +53,14 @@
     padding: 10px;
 }
 
-.funcNeedLogin a{
+#uploadNeedLogin a{
     padding-left: 20px;
     font-size: 20px;
     color: #134857;
     font-weight: bold;
 }
 
-#notesContent {
+.pageContent {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -67,11 +68,11 @@
     margin: 0;
     padding: 0;
 }
-#notesContent h2{
+.pageContent h2{
     color: var(--gray-green);
     font-size: 24px;
 }
-#notesContent ul {
+.pageContent ul {
     padding: 0;
     margin: 0;
     text-align: left;
@@ -83,9 +84,11 @@
     width: 200px;
     top: 600px;
 }
-#noteEditUpload ul{
+
+#noteEditUpload.sideBar ul {
     list-style-type: none;
     padding-left: 0;
+    color: var(--pur-blue-black);
 }
 
 .noteText {
@@ -94,7 +97,7 @@
     width:80%;
     margin-left: auto;
     margin-right: auto;
-    padding: 10px;
+    padding: 20px;
     border: 2px solid #648e93;
     padding-bottom: 30px;
     margin-bottom: 200px;
