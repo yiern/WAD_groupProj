@@ -2,18 +2,25 @@
 <!DOCTYPE html>
 
 {% block title_block %}
-    Notes
+    {% if course_notes %}
+    {{ course_notes.0.CourseID }}
+    {% else %}
+    <h1>Notes</h1>
+    {% endif %}
 {% endblock %}
 
 {% block header_block %}
+    {% if course_notes %}
+    <h1>{{ course_notes.0.CourseID }}</h1>
+    {% else %}
     <h1>Notes</h1>
+    {% endif %}
 {% endblock %}
 
 {% block body_block %}
 
     <div class="pageContent">
         {% if course_notes %}
-            <h2 class="listTitle">Notes from {{course_notes.CourseID_id}}:</h2>
             <ul>
                 {% for note in course_notes %}
                     <li><a href = "{% url 'rango:tNnote' note.NoteID %}">{{note.Topics}}</a></li>

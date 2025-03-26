@@ -2,11 +2,19 @@
 <!DOCTYPE html>
 
 {% block title_block %}
-    Note Title
+    {% if note %}
+        {{ note.Topics }}
+    {% else %}
+        Note Title
+    {% endif %}
 {% endblock %}
 
 {% block header_block %}
-    <h1>Note Title</h1>
+    {% if note %}
+        <h1>{{ note.Topics }}</h1>
+    {% else %}
+        <h1>Note Title</h1>
+    {% endif %}
 {% endblock %}
 
 {% block body_block %}
