@@ -126,7 +126,7 @@ def tNregister(request):
             student.save()
 
             registered = True
-            return redirect('login')  # Redirect to the login page after successful registration
+            return redirect('rango:tNlogin')  # Redirect to the login page after successful registration
        
         else:
             print(user_form.errors, students_form.errors)  # Print form errors for debugging
