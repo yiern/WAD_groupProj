@@ -12,6 +12,7 @@
             {% block title_block %}
             {% endblock %}
         </title>
+
         <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
@@ -19,32 +20,31 @@
 
     <body>
         <div id="toolBar">
-            
             <a class="tNicon" href="{% url 'rango:tNindex' %}"><strong>Think</strong><em>Note</em></a>
             <hr>
-            Search Bar
+            <p>Search Bar</p>
             <hr>
             {%if user.is_authenticated %}
                 <p class="userLoginInfo"><a href = "{% url 'rango:tNuser' %}">User Profile</a> / <a href = "{% url 'rango:logout' %}">Logout</a></p>
             {% else %}
                 <p class="userLoginInfo"><a href="{% url 'rango:tNlogin' %}">Login</a> / <a href="{% url 'rango:tNregister' %}">Register</a></p>
             {% endif %}
-           
         </div>
-        <br>
-        <div>
 
+        <br>
+
+        <div>
             {%block header_block%}
             {% endblock %}
-
         </div>
+
         <br>
+
         <div>
-           
             {% block body_block %}
             {% endblock %}
-        
         </div>
+
         <div class="footer">
             <h2>Directory</h2>
             <ul>
@@ -55,9 +55,7 @@
                 <li><a href="{% url 'rango:tNsearch' %}">Search</a></li>
                 <li><a href="{% url 'rango:tNcourse' %}">Courses</a></li>
                 <li><a href="{% url 'rango:tNindex' %}">Back to Home</a></li>
-
             </ul>
         </div>
     </body>
-
 </html>
