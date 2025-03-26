@@ -3,13 +3,14 @@
 
 <!DOCTYPE html>
 
-<html>
-    <head lang="en">
+<html lang="en">
+    <head>
         <meta charset="UTF-8" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.8/mammoth.browser.min.js"></script>
         <title> 
             ThinkNote -
             {% block title_block %}
+                Default Page Title
             {% endblock %}
         </title>
 
@@ -19,28 +20,30 @@
     </head>
 
     <body>
-        <div id="toolBar">
+        <nav id="toolBar" aria-label="Navigation">
             <a class="tNicon" href="{% url 'rango:tNindex' %}"><strong>Think</strong><em>Note</em></a>
-            <hr>
+            
             <p>Search Bar</p>
-            <hr>
-            {%if user.is_authenticated %}
-                <p class="userLoginInfo"><a href = "{% url 'rango:tNuser' %}">User Profile</a> / <a href = "{% url 'rango:logout' %}">Logout</a></p>
+            
+            {% if user.is_authenticated %}
+                <p class="userLoginInfo">
+                    <a href="{% url 'rango:tNuser' %}">User Profile</a> / 
+                    <a href="{% url 'rango:logout' %}">Logout</a> 
+                </p>
             {% else %}
-                <p class="userLoginInfo"><a href="{% url 'rango:tNlogin' %}">Login</a> / <a href="{% url 'rango:tNregister' %}">Register</a></p>
+                <p class="userLoginInfo">
+                    <a href="{% url 'rango:tNlogin' %}">Login</a> / 
+                    <a href="{% url 'rango:tNregister' %}">Register</a> 
+                </p>
             {% endif %}
-        </div>
+        </nav>
 
-        <br>
-
-        <div>
+        <header>
             {%block header_block%}
             {% endblock %}
-        </div>
+        </header>
 
-        <br>
-
-        <div>
+        <main>
             {% block body_block %}
             {% endblock %}
         </div>
@@ -49,7 +52,7 @@
             <h2>Directory</h2>
             <ul>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'rango:tNupload' %}">Upload</a></li>
+                    <li><a href="{% url 'rango:tNupload' %}">Upload My Note</a></li>
                     <li><a href="{% url 'rango:tNuser' %}">User profile</a></li>
                 {% endif %}
                 <li><a href="{% url 'rango:tNsearch' %}">Search</a></li>

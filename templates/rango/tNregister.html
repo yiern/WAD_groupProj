@@ -11,14 +11,13 @@
 
 {% block body_block %}
     
-    <div class="formFunc"><!--Register function-->
+    <div class="formFunc">
         {% if registered %}
             <strong>thank you for registering!</strong>
             <br>
             <a href="/rango/">Return to the homepage.</a>
         {% else %}
             <form id = "user_form" method="post" action="{% url 'rango:tNregister' %}" enctype="multipart/form-data">
-
                 {% csrf_token %}
                 <!-- User Form Fields -->
                 <div class="form-group">

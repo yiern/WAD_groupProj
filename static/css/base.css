@@ -1,9 +1,9 @@
 :root {
     --background-blue: #c3d7df;
     --background-lightblue: #c4d7d6;
-    --footer-green: #638269;
+    --footer-green: #58725d;
     --gray-green: #485b4d;
-    --link-yellow: #FBCA04;
+    --link-yellow: #f0c105;
     --pur-blue-black: #2e317c;
 }
 
@@ -23,13 +23,15 @@ h1 {
     color: black;
     font-family: serif;
     margin: auto;
-    padding-bottom: 20px;
-    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-top: 70px;
     text-align: center;
 }
 
 h2 {
     font-size: 20px;
+    color: var(--gray-green);
+    padding-bottom: 10px;
 }
 
 ul {
@@ -68,7 +70,7 @@ a{
 .userLoginInfo{
     color: var(--link-yellow);
     font-size: 18px;
-    text-shadow: 1px -1px 0 #caac2a;
+    text-shadow: 1px -1px 0 #bda227;
 }
 
 .userLoginInfo a{
@@ -89,7 +91,9 @@ a{
 
 .footer ul{
     color: var(--footer-green);
-    padding-left: 30px;
+    padding-left: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
 }
 
 .footer a{

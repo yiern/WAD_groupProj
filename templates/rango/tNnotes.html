@@ -1,13 +1,16 @@
 {% extends 'rango/tNbase.html' %}
 <!DOCTYPE html>
 
-
+{% block title_block %}
+    Notes
+{% endblock %}
 
 {% block header_block %}
     <h1>Notes</h1>
 {% endblock %}
 
 {% block body_block %}
+
     <div class="pageContent">
         {% if course_notes %}
             <h2 class="listTitle">Notes from {{course_notes.CourseID_id}}:</h2>

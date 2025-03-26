@@ -7,7 +7,6 @@
 
 {% block header_block %}
     <h1>Note Title</h1>
-
 {% endblock %}
 
 {% block body_block %}
@@ -60,14 +59,10 @@
                 <li><a href = "{% url 'rango:tNlogin' %}">Want to edit this note as your own? Click here to login!</a></li>
             {% endif %}
         </ul>
-        
     </div>
+
     {% else %}
-        no note present
+        <p>No note present</p>
     {% endif %}
-
-
-
-    
 {% endblock %}
 

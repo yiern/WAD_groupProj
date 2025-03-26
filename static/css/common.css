@@ -29,8 +29,7 @@
 }
 
 .listTitle {
-    color: var(--gray-green);
-    padding-bottom: 0;
+    
 }
 
 #indexContent {
@@ -38,6 +37,7 @@
     padding: 10px;
     text-align: center;
     width:calc(100vw - 320px);
+    margin-top: 20px;
 }
 
 #indexContent pre {
@@ -54,6 +54,8 @@
     font-size: 20px;
     font-weight: bold;
     padding-left: 20px;
+    margin-top: 40px;
+    display: inline-block;
 }
 
 .pageContent {
@@ -78,7 +80,7 @@
 }
 
 #noteEditUpload {
-    height:130px;
+    height:180px;
     top: 600px;
     width: 200px;
 }

@@ -11,17 +11,12 @@
 
 {% block body_block %}
     <h2 id="slogan">Connecting Minds, Sharing Notes.</h2>
-    <br>
-    <div class="sideBar">
+    
+    <div id="indexContent">
         <h2>Recommended notes:</h2>
         <p>There are no notes present.</p> 
-        
-        <h4>Text File Content for test</h4>
-        {% if file_content%}
-            <pre>{{ file_content }}</pre>
-        {% endif %}
     </div>
-    <br>
+    
     <div class="sideBar">
         <h2>List of courses</h2>
         {% if courses %}
@@ -34,7 +29,5 @@
             <strong>There are no notes present.</strong>
         {% endif %}
     </div>
-   
-    <br>
 {% endblock %}
 
