@@ -25,9 +25,9 @@
             Search Bar
             <hr>
             {%if user.is_authenticated %}
-                <p class="useLoginfo"><a href = "{% url 'rango:tNuser' %}">User Profile</a> / <a href = "{% url 'rango:logout' %}">Logout</a></p>
+                <p class="userLoginInfo"><a href = "{% url 'rango:tNuser' %}">User Profile</a> / <a href = "{% url 'rango:logout' %}">Logout</a></p>
             {% else %}
-                <p class="useLoginfo"><a href="{% url 'rango:tNlogin' %}">Login</a> / <a href="{% url 'rango:tNregister' %}">Register</a></p>
+                <p class="userLoginInfo"><a href="{% url 'rango:tNlogin' %}">Login</a> / <a href="{% url 'rango:tNregister' %}">Register</a></p>
             {% endif %}
            
         </div>

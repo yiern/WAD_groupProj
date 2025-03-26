@@ -1,41 +1,35 @@
-/* Outer container to center the form vertically and horizontally */
 #uploadFunc {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align to top */
-    padding-top: 50px; /* Push it down from the top */
+    align-items: flex-start;
+    padding-top: 50px;
     height: 100vh;
 }
 
-/* Center the form contents 
-#c4d7d6   #869d9d
-*/
 #uploadFunc form {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 600px; /* Optional: control form width */
-    background: #c4d7d6;
+    max-width: 600px;
+    background: var(--background-lightblue);
     padding: 20px;
     border-radius: 8px;
 }
 
-/* Optional: spacing between form groups */
 #uploadFunc .form-group {
     width: 100%;
     max-width: 500px;
     margin-bottom: 15px;
     text-align: left;
-    background-color: #c4d7d6;
+    background-color: var(--background-lightblue);
 }
 
-/* Make sure labels and inputs are aligned nicely */
 #uploadFunc label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    background-color: #c4d7d6;
+    background-color: var(--background-lightblue);
 }
 
 #uploadFunc input,
@@ -47,9 +41,8 @@
     border-radius: 4px;
 }
 
-/* Center the submit button */
 #uploadFunc button {
-    align-self: center; /* center the button within flex column */
+    align-self: center;
     margin-top: 10px;
     padding: 10px 20px;
 }
