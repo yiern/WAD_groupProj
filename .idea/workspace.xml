@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdd5f8f2-7460-4f5b-adbe-9d6d8dba406e" name="Changes" comment="Modify the page when you enter the wrong password">
+    <list default="true" id="bdd5f8f2-7460-4f5b-adbe-9d6d8dba406e" name="Changes" comment="password changing done">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rango/tNbase.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/tNbase.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rango/tNupload.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/tNupload.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +191,8 @@
       <workItem from="1743035739614" duration="16143000" />
       <workItem from="1743056896041" duration="1027000" />
       <workItem from="1743077771332" duration="135000" />
-      <workItem from="1743077945508" duration="6510000" />
+      <workItem from="1743077945508" duration="11511000" />
+      <workItem from="1743112164312" duration="324000" />
     </task>
     <task id="LOCAL-00001" summary="Remedial content (Course, searches, notes)">
       <option name="closed" value="true" />
@@ -278,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743084277464</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="password changing done">
+      <option name="closed" value="true" />
+      <created>1743084859222</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1743084859222</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,7 +334,8 @@
     <MESSAGE value="Landscaping and fix" />
     <MESSAGE value="password html done" />
     <MESSAGE value="Modify the page when you enter the wrong password" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modify the page when you enter the wrong password" />
+    <MESSAGE value="password changing done" />
+    <option name="LAST_COMMIT_MESSAGE" value="password changing done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

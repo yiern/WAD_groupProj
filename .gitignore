@@ -16,6 +16,8 @@
 /readme.html
 /wp-*.php
 /xmlrpc.php
+__pycache__/
+*.pyc
 
 # Configuration
 wp-config.php
