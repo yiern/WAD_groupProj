@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, reverse_lazy
 from rango import views
 from tango_with_django_project import settings
 from django.conf.urls.static import static
@@ -21,8 +21,8 @@ urlpatterns = [
     path('serve_docx/<int:NoteID>/', views.serve_docx, name='serve_docx'),
     path('logout/', views.user_logout, name='logout'),
     path('tNedit_profile/', views.tNedit_profile, name='tNedit_profile'),
-    path('password_change/', auth_views.PasswordChangeView.as_view(template_name='rango/password_change.html'), name='password_change'),
-    path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='rango/password_change_done.html'), name='password_change_done'),
+    path('password_change/', auth_views.PasswordChangeView.as_view(template_name='rango/password_change.html',success_url=reverse_lazy('rango:password_change_done')  ), name='password_change'),
+    path('password_change_done/', auth_views.PasswordChangeDoneView.as_view(template_name='rango/password_change_done.html'), name='password_change_done'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
