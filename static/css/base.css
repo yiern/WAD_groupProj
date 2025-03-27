@@ -29,8 +29,8 @@ h1 {
 }
 
 h2 {
-    font-size: 20px;
     color: var(--gray-green);
+    font-size: 20px;
     padding-bottom: 10px;
 }
 
@@ -40,7 +40,7 @@ ul {
 
 a{
     color: inherit;
-    text-decoration:none;
+    text-decoration: none;
 }
 
 #toolBar {
@@ -91,9 +91,9 @@ a{
 
 .footer ul{
     color: var(--footer-green);
-    padding-left: 40px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 18px;
+    padding-left: 40px;
 }
 
 .footer a{

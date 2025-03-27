@@ -23,7 +23,10 @@
         <nav id="toolBar" aria-label="Navigation">
             <a class="tNicon" href="{% url 'rango:tNindex' %}"><strong>Think</strong><em>Note</em></a>
             
-            <p>Search Bar</p>
+            <form class="search-form" action="{% url 'rango:tNsearch' %}" method="get">
+                <input type="text" name="q" placeholder="Search notes..." aria-label="Search">
+                <button type="submit">Search</button>
+            </form>
             
             {% if user.is_authenticated %}
                 <p class="userLoginInfo">

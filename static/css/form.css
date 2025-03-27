@@ -70,3 +70,29 @@ select[name="CourseID"] {
     padding: 8px;
     width: 80%;
 }
+
+.search-form {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0 1rem;
+}
+
+.search-form input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex-grow: 1;
+    padding: 0.5rem;
+}
+
+.search-form button {
+    background-color: #92b3a5;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
+.search-form button:hover {
+    background-color: #83a78d;
+}

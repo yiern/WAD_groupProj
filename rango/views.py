@@ -141,7 +141,17 @@ def tNregister(request):
                            'registered': registered})
 
 def tNsearch(request):
-    return render(request, 'rango/tNsearch.html')
+    query = request.GET.get('q', '')  # Get the search query
+    search_results = None
+    
+    if query:
+        search_results = Note.objects.filter(Topics__icontains=query)
+    
+    return render(request, 'rango/tNsearch.html', {
+        'searchResults': search_results,
+        'searchTitle': f"Results for '{query}'",
+        'query': query
+    })
 
 @login_required
 def tNupload(request, NoteID = None):
