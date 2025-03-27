@@ -1,5 +1,4 @@
 {% extends 'rango/tNbase.html' %}
-<!DOCTYPE html>
 
 {% block title_block %}
     {% if searchTitle %}
@@ -18,21 +17,30 @@
 {% endblock %}
 
 {% block body_block %}
-      
-    <div id="notesContent">
 
-        {% if searchResults%}
-            <h2>Maybe you want to find: </h2>
-            <br>
-            <ul>
-                {% for searchResult in searchResults %}
-                    <li></li><!--here links to different notes-->
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p><strong>No results found.</strong></p>
-        {% endif %}       
-    </div>
-    
+   <div class="search-wrapper">
+    <form class="search-bar" method="get" action="{% url 'rango:tNsearch' %}">
+      <input type="text" name="q" placeholder="search notes..." class="search-input" value="{{ query }}">
+      <button type="submit" class="search-btn">🔍</button>
+    </form>
+  </div>
+
+  <div id="notesContent">
+    {% if searchResults %}
+        <h2>you might looking：</h2>
+        <ul>
+          {% for searchResult in searchResults %}
+            <li>
+              <a href="{% url 'rango:tNnote' searchResult.NoteID %}">
+                {{ searchResult.Topics }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+    {% else %}
+        <p><strong>no found</strong></p>
+    {% endif %}
+  </div>
+
 {% endblock %}
 

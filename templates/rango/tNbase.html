@@ -21,9 +21,11 @@
         <div id="toolBar">
             
             <a id="tNicon" href="{% url 'rango:tNindex' %}"><strong>Think</strong><em>Note</em></a>
-            <hr>
-            Search Bar
-            <hr>
+            <form method="get" action="{% url 'rango:tNsearch' %}" class="search-bar">
+            <input type="text" name="q" placeholder="search..." class="search-input" />
+            <button type="submit" class="search-btn">🔍</button>
+            </form>
+
             {%if user.is_authenticated %}
                 <p class="useLoginfo"><a href = "{% url 'rango:tNuser' %}">User Profile</a> / <a href = "{% url 'rango:logout' %}">Logout</a></p>
             {% else %}
