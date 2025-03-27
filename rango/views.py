@@ -198,8 +198,12 @@ def tNupload(request, NoteID=None):
 
 def tNuser(request):
     notes = Note.objects.filter(user=request.user.id)
-    return render(request, 'rango/tNuser.html', {'notes': notes, 'username': request.user.username})
-
+    student = request.user.students
+    return render(request, 'rango/tNuser.html', {
+        'notes': notes,
+        'student': student,
+        'username': request.user.username
+    })
 
 @login_required
 def tNedit_profile(request):

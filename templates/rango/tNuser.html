@@ -2,39 +2,47 @@
 <!DOCTYPE html>
 
 {% block header_block %}
-    <h1>My Profile</h1>
+    <h1 style="text-align: center; font-family: 'Georgia', serif; font-size: 36px; letter-spacing: 2px; color: #2e317c;">
+        👤 My Profile
+    </h1>
 {% endblock %}
 
 {% block body_block %}
-    {% if student.profile_picture %}
-        <img src="{{ student.profile_picture.url }}" alt="Profile Picture" style="width:150px; border-radius: 50%;">
-    {% else %}
-    <p>No profile picture yet.</p>
-    {% endif %}
-    <a href="{% url 'rango:tNedit_profile' %}">✏️ Edit Profile</a>
+    <div style="text-align: center; margin-bottom: 20px;">
+        {% if student.profile_picture %}
+            <img src="{{ student.profile_picture.url }}" alt="Profile Picture" style="width:150px; border-radius: 50%;">
+        {% else %}
+            <p>No profile picture yet.</p>
+        {% endif %}
 
-    <div id="notesContent">
-        <h2>My Notes</h2>
+        <div style="margin-top: 10px;">
+            <a href="{% url 'rango:tNedit_profile' %}" class="btn" style="text-decoration: none; color: #fff; background-color: #6e8b74; padding: 8px 16px; border-radius: 6px;">✏️ Edit Profile</a>
+        </div>
+    </div>
+
+    <div id="notesContent" style="max-width: 800px; margin: auto;">
+        <h2 style="text-align: center;">My Notes</h2>
         {% if notes %}
             <ul>
-                {% for note in notes %}<!--Here shows the notes-->
-                    <li><a href = "{% url 'rango:tNnote' note.NoteID %}">{{note.Topics}}</a></li>
+                {% for note in notes %}
+                    <li><a href="{% url 'rango:tNnote' note.NoteID %}">{{ note.Topics }}</a></li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>You have not upload any notes yet.</p>
+            <p style="text-align: center;">You have not uploaded any notes yet.</p>
         {% endif %}
+
         <br>
-        <h2>My Edits</h2>
+
+        <h2 style="text-align: center;">My Edits</h2>
         {% if edits %}
             <ul>
                 {% for edit in edits %}
-                    
+                    <li><a href="{% url 'rango:tNnote' edit.NoteID %}">{{ edit.Topics }}</a></li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No Notes has been edited</p>
+            <p style="text-align: center;">No Notes have been edited</p>
         {% endif %}
     </div>
 {% endblock %}
-
