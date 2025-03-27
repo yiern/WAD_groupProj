@@ -210,6 +210,9 @@ def tNedit_profile(request):
         student.YearEnrolled = request.POST.get('YearEnrolled')
         student.CurrentYearStudent = request.POST.get('CurrentYearStudent')
 
+        if 'profile_picture' in request.FILES:
+            student.profile_picture = request.FILES['profile_picture']
+
         request.user.save()
         student.save()
         messages.success(request, "updated！")
@@ -219,6 +222,7 @@ def tNedit_profile(request):
         'user': request.user,
         'student': student,
     })
+
 
 
 @login_required

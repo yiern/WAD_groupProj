@@ -4,20 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdd5f8f2-7460-4f5b-adbe-9d6d8dba406e" name="Changes" comment=" Limit the number of password login errors">
+    <list default="true" id="bdd5f8f2-7460-4f5b-adbe-9d6d8dba406e" name="Changes" comment="fix login">
+      <change afterPath="$PROJECT_DIR$/templates/rango/tNedit_profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rango/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/rango/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rango/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/rango/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rango/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rango/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/thinkNote/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/thinkNote/course.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/thinkNote/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/thinkNote/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/thinkNote/note.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/thinkNote/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/thinkNote/search.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/thinkNote/upload.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/thinkNote/user_profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tango_with_django_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tango_with_django_project/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rango/tNprofile_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rango/tNuser.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/tNuser.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,30 +59,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Django Server.WAD_groupProj.executor": "Run",
-    "Python.manage.executor": "Run",
-    "Python.populate_rango.executor": "Run",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/keti010/Downloads/WAD_groupProj-main",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "aDefault",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django Server.WAD_groupProj.executor&quot;: &quot;Run&quot;,
+    &quot;Python.manage.executor&quot;: &quot;Run&quot;,
+    &quot;Python.populate_rango.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/keti010/Downloads/WAD_groupProj-main&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\keti010\PycharmProjects\WAD_groupProj\static\javascript" />
@@ -197,7 +194,10 @@
       <workItem from="1742374777724" duration="1163000" />
       <workItem from="1742376184716" duration="4563000" />
       <workItem from="1743034097984" duration="956000" />
-      <workItem from="1743035739614" duration="13321000" />
+      <workItem from="1743035739614" duration="16143000" />
+      <workItem from="1743056896041" duration="1027000" />
+      <workItem from="1743077771332" duration="135000" />
+      <workItem from="1743077945508" duration="1636000" />
     </task>
     <task id="LOCAL-00001" summary="Remedial content (Course, searches, notes)">
       <option name="closed" value="true" />
@@ -247,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743051802264</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix login">
+      <option name="closed" value="true" />
+      <created>1743053609938</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1743053609938</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -286,7 +294,8 @@
     <MESSAGE value="fix all merge conflict" />
     <MESSAGE value="search bar fix" />
     <MESSAGE value=" Limit the number of password login errors" />
-    <option name="LAST_COMMIT_MESSAGE" value=" Limit the number of password login errors" />
+    <MESSAGE value="fix login" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix login" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/WAD_groupProj$manage.coverage" NAME="manage Coverage Results" MODIFIED="1742181838469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

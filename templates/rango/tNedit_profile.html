@@ -1,0 +1,52 @@
+{% extends 'rango/tNbase.html' %}
+{% load static %}
+
+{% block title_block %}
+    Edit Profile
+{% endblock %}
+
+{% block header_block %}
+    <h1 style="text-align:center;">🧑‍🎓 Edit Your Profile</h1>
+{% endblock %}
+
+{% block body_block %}
+<form method="post" enctype="multipart/form-data" class="profile-form" style="max-width: 600px; margin: auto;">
+  {% csrf_token %}
+
+  <div style="text-align: center; margin-bottom: 20px;">
+    {% if student.profile_picture %}
+        <img src="{{ student.profile_picture.url }}" alt="Profile Picture" style="width:150px; border-radius: 50%;">
+    {% else %}
+        <p>No profile picture yet.</p>
+    {% endif %}
+    <label for="profile_picture">🖼️ Change Profile Picture:</label>
+    <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+  </div>
+
+  <div class="form-group">
+    <label for="username">👤 Username:</label>
+    <input type="text" id="username" name="username" value="{{ user.username }}">
+  </div>
+
+  <div class="form-group">
+    <label for="email">📧 Email:</label>
+    <input type="email" id="email" name="email" value="{{ user.email }}">
+  </div>
+
+  <div class="form-group">
+    <label for="year">🎓 Year of Enrolment:</label>
+    <input type="number" id="year" name="YearEnrolled" value="{{ student.YearEnrolled }}" min="2000" max="2100">
+  </div>
+
+  <div class="form-group">
+    <label for="current">📚 Current Academic Year:</label>
+    <input type="number" id="current" name="CurrentYearStudent" value="{{ student.CurrentYearStudent }}" min="1" max="6">
+  </div>
+
+  <button type="submit" class="btn">💾 Update Profile</button>
+
+  <p style="margin-top: 20px;">
+    🔐 Want to change your password? <a href="{% url 'rango:password_change' %}">Click here</a>
+  </p>
+</form>
+{% endblock %}
