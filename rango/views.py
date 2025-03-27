@@ -30,9 +30,9 @@ def tNcourse(request):
 
 
 def tNlogin(request):
-    print("DEBUG: datetime is", dt)
     max_attempts = 5
     lockout_time = timedelta(minutes=10)
+    error_message = None
 
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -47,23 +47,26 @@ def tNlogin(request):
         last_attempt = dt.strptime(request.session['last_attempt'], '%Y-%m-%d %H:%M:%S.%f')
         if request.session['login_attempts'] >= max_attempts:
             if dt.now() - last_attempt < lockout_time:
-                return HttpResponse("Too many failed attempts. Please try again later.")
+                error_message = "🚫 Too many failed attempts. Please try again later."
             else:
 
                 request.session['login_attempts'] = 0
 
-        user = authenticate(username=username, password=password)
-        if user and user.is_active:
-            login(request, user)
-            request.session['login_attempts'] = 0  # Login successful, reset count
-            return redirect(reverse('rango:tNindex'))
-        else:
-            request.session['login_attempts'] += 1
-            request.session['last_attempt'] = str(dt.now())
-            return HttpResponse("Invalid login. Attempts left: {}".format(
-                max_attempts - request.session['login_attempts']))
-    else:
-        return render(request, 'rango/tNlogin.html')
+        if not error_message:
+            user = authenticate(username=username, password=password)
+            if user and user.is_active:
+                login(request, user)
+                request.session['login_attempts'] = 0
+                return redirect(reverse('rango:tNindex'))
+            else:
+                request.session['login_attempts'] += 1
+                request.session['last_attempt'] = str(dt.now())
+                attempts_left = max_attempts - request.session['login_attempts']
+                error_message = f"❌ Invalid login. Attempts left: {attempts_left}"
+
+    return render(request, 'rango/tNlogin.html', {
+            'error_message': error_message
+        })
 
 
 def serve_docx(request, NoteID):
