@@ -40,11 +40,11 @@ def index(request):
 def tNindex(request):
 
     courses = Courses.objects.all()
-    top_notes = Note.objects.order_by('-views')[:5]  # Get top 5 most viewed notes
+    top_notes = Note.objects.order_by('-views')[:5]
     
     return render(request, 'rango/tNindex.html', {
         'courses': courses,
-        'top_notes': top_notes  # Pass to template
+        'top_notes': top_notes
     })
 
 def tNcourse(request):
@@ -206,8 +206,9 @@ def tNupload(request, NoteID = None):
 def tNuser(request):
     
     notes = Note.objects.filter(user = request.user.id)
+    
 
-    return render(request, 'rango/tNuser.html', {'notes':notes,})
+    return render(request, 'rango/tNuser.html', {'notes':notes})
 
 @login_required
 def user_logout(request):
