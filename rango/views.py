@@ -1,5 +1,6 @@
 import os
-from datetime import timedelta
+from datetime import datetime as dt, timedelta
+
 
 from django.shortcuts import get_object_or_404, render
 from django.http import FileResponse, HttpResponse
@@ -29,6 +30,7 @@ def tNcourse(request):
 
 
 def tNlogin(request):
+    print("DEBUG: datetime is", dt)
     max_attempts = 5
     lockout_time = timedelta(minutes=10)
 
@@ -39,12 +41,12 @@ def tNlogin(request):
         # Failure message in initialisation session
         if 'login_attempts' not in request.session:
             request.session['login_attempts'] = 0
-            request.session['last_attempt'] = str(datetime.now())
+            request.session['last_attempt'] = str(dt.now())
 
         # Lock time processing
-        last_attempt = datetime.strptime(request.session['last_attempt'], '%Y-%m-%d %H:%M:%S.%f')
+        last_attempt = dt.strptime(request.session['last_attempt'], '%Y-%m-%d %H:%M:%S.%f')
         if request.session['login_attempts'] >= max_attempts:
-            if datetime.now() - last_attempt < lockout_time:
+            if dt.now() - last_attempt < lockout_time:
                 return HttpResponse("Too many failed attempts. Please try again later.")
             else:
 
@@ -57,7 +59,7 @@ def tNlogin(request):
             return redirect(reverse('rango:tNindex'))
         else:
             request.session['login_attempts'] += 1
-            request.session['last_attempt'] = str(datetime.now())
+            request.session['last_attempt'] = str(dt.now())
             return HttpResponse("Invalid login. Attempts left: {}".format(
                 max_attempts - request.session['login_attempts']))
     else:
@@ -197,6 +199,26 @@ def tNupload(request, NoteID=None):
 def tNuser(request):
     notes = Note.objects.filter(user=request.user.id)
     return render(request, 'rango/tNuser.html', {'notes': notes, 'username': request.user.username})
+
+
+@login_required
+def tNedit_profile(request):
+    student = request.user.students
+
+    if request.method == 'POST':
+        request.user.email = request.POST.get('email')
+        student.YearEnrolled = request.POST.get('YearEnrolled')
+        student.CurrentYearStudent = request.POST.get('CurrentYearStudent')
+
+        request.user.save()
+        student.save()
+        messages.success(request, "updated！")
+        return redirect('rango:tNuser')
+
+    return render(request, 'rango/tNedit_profile.html', {
+        'user': request.user,
+        'student': student,
+    })
 
 
 @login_required

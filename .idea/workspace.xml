@@ -4,9 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdd5f8f2-7460-4f5b-adbe-9d6d8dba406e" name="Changes" comment="search bar fix">
+    <list default="true" id="bdd5f8f2-7460-4f5b-adbe-9d6d8dba406e" name="Changes" comment=" Limit the number of password login errors">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rango/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rango/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/rango/search_results.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/thinkNote/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/thinkNote/course.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/thinkNote/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/thinkNote/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/thinkNote/note.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/thinkNote/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/thinkNote/search.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/thinkNote/upload.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/thinkNote/user_profile.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +32,7 @@
       <list>
         <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -52,6 +64,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "Django Server.WAD_groupProj.executor": "Run",
     "Python.manage.executor": "Run",
     "Python.populate_rango.executor": "Run",
@@ -184,7 +197,7 @@
       <workItem from="1742374777724" duration="1163000" />
       <workItem from="1742376184716" duration="4563000" />
       <workItem from="1743034097984" duration="956000" />
-      <workItem from="1743035739614" duration="11762000" />
+      <workItem from="1743035739614" duration="13321000" />
     </task>
     <task id="LOCAL-00001" summary="Remedial content (Course, searches, notes)">
       <option name="closed" value="true" />
@@ -226,7 +239,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743051556584</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary=" Limit the number of password login errors">
+      <option name="closed" value="true" />
+      <created>1743051802264</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1743051802264</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,7 +285,8 @@
     <MESSAGE value="1" />
     <MESSAGE value="fix all merge conflict" />
     <MESSAGE value="search bar fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="search bar fix" />
+    <MESSAGE value=" Limit the number of password login errors" />
+    <option name="LAST_COMMIT_MESSAGE" value=" Limit the number of password login errors" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/WAD_groupProj$manage.coverage" NAME="manage Coverage Results" MODIFIED="1742181838469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
