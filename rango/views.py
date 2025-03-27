@@ -1,4 +1,6 @@
 import os
+from datetime import timedelta
+
 from django.shortcuts import get_object_or_404, render
 from django.http import FileResponse, HttpResponse
 from rango.forms import *
@@ -27,27 +29,37 @@ def tNcourse(request):
 
 
 def tNlogin(request):
-    # If the request is a HTTP POST, try to pull out the relevant information.
+    max_attempts = 5
+    lockout_time = timedelta(minutes=10)
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)
+        # Failure message in initialisation session
+        if 'login_attempts' not in request.session:
+            request.session['login_attempts'] = 0
+            request.session['last_attempt'] = str(datetime.now())
 
-        if user:
-            # Is the account active? It could have been disabled.
-            if user.is_active:
-                # If the account is valid and active, we can log the user in.
-                # We'll send the user back to the homepage.
-                login(request, user)
-                return redirect(reverse('rango:tNindex'))
+        # Lock time processing
+        last_attempt = datetime.strptime(request.session['last_attempt'], '%Y-%m-%d %H:%M:%S.%f')
+        if request.session['login_attempts'] >= max_attempts:
+            if datetime.now() - last_attempt < lockout_time:
+                return HttpResponse("Too many failed attempts. Please try again later.")
             else:
-                # An inactive account was used - no logging in!
-                return HttpResponse("Your ThinkNote account is disabled.")
+
+                request.session['login_attempts'] = 0
+
+        user = authenticate(username=username, password=password)
+        if user and user.is_active:
+            login(request, user)
+            request.session['login_attempts'] = 0  # Login successful, reset count
+            return redirect(reverse('rango:tNindex'))
         else:
-            # Bad login details were provided. So we can't log the user in.
-            print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
+            request.session['login_attempts'] += 1
+            request.session['last_attempt'] = str(datetime.now())
+            return HttpResponse("Invalid login. Attempts left: {}".format(
+                max_attempts - request.session['login_attempts']))
     else:
         return render(request, 'rango/tNlogin.html')
 
