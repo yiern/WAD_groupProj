@@ -40,9 +40,12 @@ def index(request):
 def tNindex(request):
 
     courses = Courses.objects.all()
-    notes = Note.objects.all()
-
-    return render(request, 'rango/tNindex.html', {'courses' : courses, 'notes':notes})
+    top_notes = Note.objects.order_by('-views')[:5]  # Get top 5 most viewed notes
+    
+    return render(request, 'rango/tNindex.html', {
+        'courses': courses,
+        'top_notes': top_notes  # Pass to template
+    })
 
 def tNcourse(request):
     courses = Courses.objects.all()
@@ -93,9 +96,13 @@ def serve_docx(request, NoteID):
         return HttpResponse("File not found", status=404)
 
 def tNnote(request,NoteID):
-
-    
     note = Note.objects.get(NoteID = NoteID)
+
+    # Check if user hasn't viewed this note before
+    if not note.viewed_by.filter(id=request.user.id).exists():
+        note.views += 1
+        note.viewed_by.add(request.user)
+        note.save()
 
     return render(request, 'rango/tNnote.html', {'note': note})
 
