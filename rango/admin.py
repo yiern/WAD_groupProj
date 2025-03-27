@@ -1,36 +1,32 @@
 from django.contrib import admin
-from rango.models import Category, Page
-from .models import Question, Choice
-from rango.models import UserProfile
+from .models import *
+from rango.models import *
 
 
-# Register your models here.
-
-class ChoiceAdmin(admin.TabularInline):
-    model = Choice
-    extra = 3
-
-class QuestionAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (None,               {'fields': ['question_text']}),
-        ('Date information', {'fields': ['pub_date']}),
-    ]
+# Register the Students model
+@admin.register(Students)
+class StudentsAdmin(admin.ModelAdmin):
+    list_display = ('user', 'YearEnrolled', 'CurrentYearStudent')
+    search_fields = ('user__username',)
 
 
-    inlines = [ChoiceAdmin]
+# Register other models
+@admin.register(Courses)
+class CoursesAdmin(admin.ModelAdmin):
+    list_display = ('CourseID', 'CourseName')
+    search_fields = ('CourseID', 'CourseName')
 
-    list_display = ('question_text', 'pub_date', 'was_published_recently')
-    search_fields = ['question_text']
-    list_filter = ['pub_date']
+@admin.register(Enrolls)
+class EnrollsAdmin(admin.ModelAdmin):
+    list_display = ('user', 'CourseID')
+    search_fields = ('user__username', 'CourseID__CourseID')
 
-class PageAdmin(admin.ModelAdmin):
-   list_display = ('title','category','url')
-   search_fields = ['title']
+@admin.register(Note)
+class NoteAdmin(admin.ModelAdmin):
+    list_display = ('user','user_id', 'CourseID', 'Topics', 'DateUploaded',"NoteID",'edited')
+    search_fields = ('user__username', 'CourseID__CourseID', 'Topics',"NoteID",'edited')
 
-class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug':('name',)}
 
-admin.site.register(Question, QuestionAdmin)
-admin.site.register(Page,PageAdmin)
-admin.site.register(Category,CategoryAdmin)
-admin.site.register(UserProfile)
+
+
+

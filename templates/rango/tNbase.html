@@ -1,0 +1,63 @@
+{% load static %}
+{% load rango_template_tags %}
+
+<!DOCTYPE html>
+
+<html>
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.8/mammoth.browser.min.js"></script>
+        <title> 
+            ThinkNote -
+            {% block title_block %}
+            {% endblock %}
+        </title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/jsPages.css' %}"/>
+    </head>
+
+    <body>
+        <div id="toolBar">
+            
+            <a id="tNicon" href="{% url 'rango:tNindex' %}"><strong>Think</strong><em>Note</em></a>
+            <hr>
+            Search Bar
+            <hr>
+            {%if user.is_authenticated %}
+                <p class="useLoginfo"><a href = "{% url 'rango:tNuser' %}">User Profile</a> / <a href = "{% url 'rango:logout' %}">Logout</a></p>
+            {% else %}
+                <p class="useLoginfo"><a href="{% url 'rango:tNlogin' %}">Login</a> / <a href="{% url 'rango:tNregister' %}">Register</a></p>
+            {% endif %}
+           
+        </div>
+        <br>
+        <div>
+
+            {%block header_block%}
+            {% endblock %}
+
+        </div>
+        <br>
+        <div>
+           
+            {% block body_block %}
+            {% endblock %}
+        
+        </div>
+        <div class="footer">
+            <h2>Directory</h2>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'rango:tNupload' %}">Upload</a></li>
+                    <li><a href="{% url 'rango:tNuser' %}">User profile</a></li>
+                {% endif %}
+                <li><a href="{% url 'rango:tNsearch' %}">Search</a></li>
+                <li><a href="{% url 'rango:tNcourse' %}">Courses</a></li>
+                <li><a href="{% url 'rango:tNindex' %}">Back to Home</a></li>
+
+            </ul>
+        </div>
+    </body>
+
+</html>

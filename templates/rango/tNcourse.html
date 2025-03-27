@@ -1,0 +1,38 @@
+{% extends 'rango/tNbase.html' %}
+<!DOCTYPE html>
+
+{% block title_block %}
+    Course Name
+{% endblock %}
+
+{% block header_block %}
+    <h1>Courses</h1>
+{% endblock %}
+
+{% block body_block %}
+    <div id="notesContent">
+        <div>
+            <h2 class="listTitle">Explore Different Courses!</h2>
+            {% if courses %}
+                <ul>
+                    {% for course in courses %}<!--here shows the notes-->
+                        <!--<li><span class="course-name">{{ course.CourseName }}</span></li>-->
+                        <li><a href = "{% url 'rango:tNnotes' course.CourseID %}">{{course.CourseName}}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <strong>There are no Courses available.</strong>
+            {% endif %}
+        </div>
+        <br>
+        <div class="funcNeedLogin">
+            {% if user.is_authenticated %}
+                <a href = "{% url 'rango:tNupload' %}">Upload a note</a>
+            {% else %}
+                <a href = "{% url 'rango:tNlogin' %}">Want to upload your notes? Click here to login!</a>
+            {% endif%}
+        </div>
+    </div>
+    
+{% endblock %}
+

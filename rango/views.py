@@ -1,252 +1,193 @@
-from django.conf import settings
-from django.shortcuts import redirect, render, get_object_or_404
-from django.http import HttpResponse
+import os
+from django.shortcuts import get_object_or_404, render
+from django.http import FileResponse, HttpResponse
+from rango.forms import *
+from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.decorators.csrf import csrf_exempt
-from .forms import UploadNoteForm
-
-from rango.models import Category, Page, Note, Courses, Enrolls
-from rango.forms import CategoryForm,PageForm, UserForm, UserProfileForm
-from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from datetime import datetime
+from django.contrib import messages
+from tango_with_django_project import settings
 
 
-def index(request):
-	#queries category class from model and order them by likes, first 5 
-	category_list = Category.objects.order_by('-likes')[:5] 
-	pages_list = Page.objects.order_by('-views')[:5]
+def tNindex(request):
+    courses = Courses.objects.all()
+    top_notes = Note.objects.order_by('-views')[:5]
 
-	request.session.set_test_cookie()
-
-	context_dict = {'boldmessage' : 'Crunchy, creamy, cookie, candy, cupcake!'}
-	context_dict['categories'] = category_list
-	context_dict['pages'] = pages_list
-
-	visitor_cookie_handler(request)
-	
-
-	response = render(request,'rango/index.html', context=context_dict)
-	visitor_cookie_handler(request)
-
-	return response
-
-def about(request):
+    return render(request, 'rango/tNindex.html', {
+        'courses': courses,
+        'top_notes': top_notes
+    })
 
 
-	if request.session.test_cookie_worked():
-		print("TEST COOKIE WORKED!")
-		request.session.delete_test_cookie()
-	
-	visitor_cookie_handler(request)
+def tNcourse(request):
+    courses = Courses.objects.all()
 
-	context_dict = {'name': 'yiern', 'MEDIA_URL': settings.MEDIA_URL,}
-	context_dict['visits'] = request.session['visits']
-	return render(request, 'rango/about.html',context=context_dict)
-	
+    return render(request, 'rango/tNcourse.html', {'courses': courses})
 
 
-def show_category(request,category_name_slug):
-	context_dict={}
-	try:
-		category = Category.objects.get(slug = category_name_slug)
+def tNlogin(request):
+    # If the request is a HTTP POST, try to pull out the relevant information.
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-		#Retrieve all related pages, the filter() will return a list of page objects 
-		#under name pages
-		pages = Page.objects.filter(category = category)
+        user = authenticate(username=username, password=password)
 
-		context_dict['category'] = category
-		context_dict['pages'] = pages
-	except Category.DoesNotExist:
-		context_dict['category'] = None
-		context_dict['pages'] = None
-	
-	return render(request, 'rango/category.html', context=context_dict)
+        if user:
+            # Is the account active? It could have been disabled.
+            if user.is_active:
+                # If the account is valid and active, we can log the user in.
+                # We'll send the user back to the homepage.
+                login(request, user)
+                return redirect(reverse('rango:tNindex'))
+            else:
+                # An inactive account was used - no logging in!
+                return HttpResponse("Your ThinkNote account is disabled.")
+        else:
+            # Bad login details were provided. So we can't log the user in.
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
+    else:
+        return render(request, 'rango/tNlogin.html')
+
+
+def serve_docx(request, NoteID):
+    # Fetch the note object
+    note = get_object_or_404(Note, NoteID=NoteID)
+
+    # Construct the file path
+    file_path = os.path.join(settings.MEDIA_ROOT, note.file.name)
+
+    # Serve the file with the correct headers
+    if os.path.exists(file_path):
+        response = FileResponse(open(file_path, 'rb'))
+        response['Content-Type'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        response['Content-Disposition'] = f'inline; filename="{os.path.basename(file_path)}"'
+        return response
+    else:
+        return HttpResponse("File not found", status=404)
+
+
+def tNnote(request, NoteID):
+    note = get_object_or_404(Note, NoteID=NoteID)
+
+    if request.user.is_authenticated:
+        try:
+            if not note.viewed_by.filter(pk=request.user.pk).exists():
+                note.views += 1
+                note.viewed_by.add(request.user)
+                note.save()
+        except (AttributeError, TypeError):
+            pass
+
+    return render(request, 'rango/tNnote.html', {'note': note})
+
+
+def tNnotes(request, CourseID):
+    notes_from_course = Note.objects.filter(CourseID=CourseID)
+
+    return render(request, 'rango/tNnotes.html', {'course_notes': notes_from_course})
+
+
+def tNregister(request):
+    registered = False
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+        students_form = StudentForm(request.POST)
+
+        if user_form.is_valid() and students_form.is_valid():
+            # Save the User data
+            user = user_form.save(commit=False)
+            password = user_form.cleaned_data['password']
+
+            user.set_password(password)
+            user.save()
+
+            # Save the Students data
+            student = students_form.save(commit=False)
+            student.user = user
+            student.save()
+
+            registered = True
+            return redirect('rango:tNlogin')  # Redirect to the login page after successful registration
+        else:
+            print(user_form.errors, students_form.errors)  # Print form errors for debugging
+    else:
+        user_form = UserForm()
+        students_form = StudentForm()
+
+    return render(request,
+                  'rango/tNregister.html',
+                  context={'user_form': user_form,
+                           'students_form': students_form,
+                           'registered': registered})
+
+
+def tNsearch(request):
+    query = request.GET.get('q', '')  # Get the search query
+    search_results = None
+
+    if query:
+        search_results = Note.objects.filter(Topics__icontains=query)
+
+    return render(request, 'rango/tNsearch.html', {
+        'searchResults': search_results,
+        'searchTitle': f"Results for '{query}'",
+        'query': query
+    })
+
 
 @login_required
-def add_category(request):
-	form = CategoryForm()
+def tNupload(request, NoteID=None):
+    if request.method == 'POST':
+        # Print the contents of request.POST and request.FILES
 
-	# A HTTPS post?
-	if request.method == 'POST':
-		form = CategoryForm(request.POST)
-		# have we been provided with a valid form?
-		if form.is_valid():
-			# save new category into database
-			form.save(commit = True)
+        if NoteID is not None:
+            edit = True
+            creator = Note.objects.get(NoteID=NoteID)
+            form = NoteForm(request.POST, request.FILES, user=request.user.students, edited=NoteID,
+                            CourseID=creator.CourseID, )  # request.user.students is the Students instance
 
-			return redirect('/rango/')
-		else:
-			print(form.errors)
+        else:
+            edit = False
+            creator = None
+            form = NoteForm(request.POST, request.FILES, user=request.user.students,
+                            edited=NoteID)  # request.user.students is the Students instance
 
-	return render(request, 'rango/add_category.html', {'form':form})
+        if form.is_valid():
 
-@login_required
-def add_page(request, category_name_slug):
-	
-	try:
-		category = Category.objects.get(slug = category_name_slug)
-	except Category.DoesNotExist:
-		category = None
-	
-	if category is None:
-		return redirect('/rango/')
-	form = PageForm()
-	if request.method == 'POST':
-		form = PageForm(request.POST)
+            form.save()  # Save the form with the user field set
+            messages.success(request, 'File uploaded successfully!')  # Add a success message
 
-		if form.is_valid():
-			if category:
-				page = form.save(commit = False)
-				page.category = category
-				page.views = 0
-				page.save()
+            return redirect('rango:tNupload')  # Redirect to the index page after successful upload
+        else:
 
-				return redirect(reverse('rango:show_category', kwargs={'category_name_slug':category_name_slug}))
-			
-			else:
-				print(form.errors)
+            # Render an empty form for GET requests
+            form = NoteForm(user=request.user.students)
+            messages.error(request, 'File not uploaded successfully')  # Add a success message
+        print("POST data:", request.POST)
+        print("FILES data:", request.FILES)
+    else:
+        if NoteID is not None:
+            edit = True
+            creator = get_object_or_404(Note, NoteID=NoteID)
+            form = NoteForm(user=request.user.students, edited=creator.user, CourseID=creator.CourseID)
+        else:
+            edit = False
+            creator = None
+            form = NoteForm(user=request.user.students)
 
-	context_dict = {'form': form, 'category': category}
-	return render(request, 'rango/add_page.html', context= context_dict)
+    return render(request, 'rango/tNupload.html', {'form': form, 'edit': edit, 'creator': creator})
 
-def register(request):
-	registered = False
 
-	if request.method == 'POST':
-		user_form = UserForm(request.POST)
-		profile_form = UserProfileForm(request.POST)
+def tNuser(request):
+    notes = Note.objects.filter(user=request.user.id)
+    return render(request, 'rango/tNuser.html', {'notes': notes, 'username': request.user.username})
 
-		if user_form.is_valid() and profile_form.is_valid():
-			user = user_form.save()
-
-			user.set_password(user.password)
-			user.save()
-
-			profile = profile_form.save(commit = False)
-			profile.user = user
-
-			if 'picture' in request.FILES:
-				profile.picture = request.FILES['picture']
-			
-			profile.save()
-
-			registered = True
-		else:
-			print(user_form.errors, profile_form.errors)
-	else:
-		user_form = UserForm()
-		profile_form = UserProfileForm()
-
-	return render(request,'rango/register.html', context = {'user_form': user_form,
-														 	'profile_form':profile_form,
-															'registered': registered})
-
-def user_login(request):
-	if request.method == 'POST':
-
-		username = request.POST.get('username')
-		password = request.POST.get('password')
-
-		user = authenticate(username=username, password = password)
-
-		if user:
-			if user.is_active:
-				login(request,user)
-				return redirect(reverse('rango:index'))
-			
-			else:
-				return HttpResponse('Your Rango account is disabled')
-		else:
-			print(f"Invalid login details: {username}, {password}")
-			return HttpResponse("Invalid login details supplied.")
-	else:
-		return render(request, 'rango/login.html')
-	
-@login_required
-def restricted(request):
-	return render(request, 'rango/restricted.html')
 
 @login_required
 def user_logout(request):
-	logout(request)
-	return redirect(reverse('rango:index'))
-
-@login_required
-@csrf_exempt
-def upload_note(request):
-    if request.method == 'POST':
-        form = UploadNoteForm(request.POST, request.FILES)
-        if form.is_valid():
-            note = form.save(commit=False)
-            note.owner = request.user
-            note.save()
-            return redirect('notes')
-    else:
-        form = UploadNoteForm()
-
-    return render(request, 'rango/upload_note.html', {'form': form})
-
-@login_required
-def list_notes(request):
-    notes = Note.objects.all()
-    return render(request, 'rango/notes.html', {'notes': notes})
-
-def search_notes(request):
-    query = request.GET.get('query', '')
-    notes = Note.objects.filter(topics__icontains=query)
-    return render(request, 'rango/search_results.html', {'notes': notes, 'query': query})
-
-def list_courses(request):
-    courses = Courses.objects.all()
-    return render(request, 'rango/courses.html', {'courses': courses})
-
-@login_required
-@csrf_exempt
-def enroll_course(request):
-    if request.method == 'POST':
-        course_id = request.POST.get('course_id')
-        course = get_object_or_404(Courses, course_id=course_id)
-        Enrolls.objects.get_or_create(student=request.user, course=course)
-        return redirect('courses')
-
-    return render(request, 'rango/enroll.html', {'courses': Courses.objects.all()})
-
-@login_required
-def user_profile(request):
-    return render(request, 'rango/profile.html', {'user': request.user})
-
-@login_required
-@csrf_exempt
-def edit_profile(request):
-    if request.method == 'POST':
-        request.user.email = request.POST.get('email', request.user.email)
-        request.user.university = request.POST.get('university', request.user.university)
-        request.user.save()
-        return redirect('profile')
-
-    return render(request, 'rango/edit_profile.html', {'user': request.user})
-
-def visitor_cookie_handler(request):
-
-	visits = int(get_server_side_cookie(request,'visits','1'))
-
-	last_visit_cookie = get_server_side_cookie(request,'last_visit',str(datetime.now()))
-	last_visit_time = datetime.strptime(last_visit_cookie[:-7],'%Y-%m-%d %H:%M:%S')
-
-	if (datetime.now() - last_visit_time).days > 0:
-		visits = visits + 1
-		request.session['last_visit'] = str(datetime.now())
-	else:
-		request.session['last_visit'] = last_visit_cookie
-	
-	request.session['visits'] = visits
-
-
-
-def get_server_side_cookie(request, cookie, default_val=None):
-	val = request.session.get(cookie)
-	if not val:
-		val = default_val
-	return val
-
+    logout(request)
+    return redirect(reverse('rango:tNindex'))

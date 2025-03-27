@@ -1,0 +1,34 @@
+{% extends 'rango/tNbase.html' %}
+<!DOCTYPE html>
+
+{% block header_block %}
+    <h1>My Profile</h1>
+{% endblock %}
+
+{% block body_block %}
+      
+    <div id="notesContent">
+        <h2>My Notes</h2>
+        {% if notes %}
+            <ul>
+                {% for note in notes %}<!--Here shows the notes-->
+                    <li><a href = "{% url 'rango:tNnote' note.NoteID %}">{{note.Topics}}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have not upload any notes yet.</p>
+        {% endif %}
+        <br>
+        <h2>My Edits</h2>
+        {% if edits %}
+            <ul>
+                {% for edit in edits %}
+                    
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No Notes has been edited</p>
+        {% endif %}
+    </div>
+{% endblock %}
+

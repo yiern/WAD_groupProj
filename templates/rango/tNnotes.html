@@ -1,0 +1,25 @@
+{% extends 'rango/tNbase.html' %}
+<!DOCTYPE html>
+
+
+
+{% block header_block %}
+    <h1>Notes</h1>
+{% endblock %}
+
+{% block body_block %}
+    <div id="notesContent">
+        {% if course_notes %}
+            <h2 class="listTitle">Notes from {{course_notes.CourseID_id}}:</h2>
+            <ul>
+                {% for note in course_notes %}
+                    <li><a href = "{% url 'rango:tNnote' note.NoteID %}">{{note.Topics}}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            No notes from this course
+        {% endif %}
+    </div>
+
+{% endblock %}
+
