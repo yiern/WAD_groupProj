@@ -2,13 +2,12 @@
 <!DOCTYPE html>
 
 {% block header_block %}
-    <h1>My Profile</h1>
+    <h1 id="username"><strong>{{ username }}'s</strong> Profile</h1>
 {% endblock %}
 
 {% block body_block %}
       
     <div class="pageContent">
-        
         <h2>My Notes</h2>
         {% if notes %}
             <ul>

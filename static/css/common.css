@@ -60,7 +60,7 @@
     text-align: left;
 }
 
-.pageContent ul li{
+.pageContent ul li {
     margin: 10px 0; 
 }
 
@@ -86,4 +86,14 @@
     padding: 20px;
     padding-bottom: 30px;
     width: 80%;
+}
+
+#username {
+    color: var(--icon-green);
+}
+
+#username strong {
+    color: var(--icon-purple);
+    font-family: Georgia, serif;
+    font-size: 34px;
 }
