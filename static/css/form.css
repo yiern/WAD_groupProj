@@ -1,0 +1,98 @@
+.formFunc {
+    align-items: flex-start;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.formFunc form {
+    align-items: center;
+    background: var(--background-lightblue);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    padding: 20px;
+    width: 100%;
+}
+
+.formFunc .form-group {
+    background-color: var(--background-lightblue);
+    margin-bottom: 15px;
+    max-width: 500px;
+    text-align: left;
+    width: 100%;
+}
+
+.formFunc label {
+    background-color: var(--background-lightblue);
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.formFunc input,
+.formFunc select,
+.formFunc textarea {
+    border: 1px solid #869d9d;
+    border-radius: 4px;
+    padding: 8px;
+    width: 90%;
+}
+
+.formFunc button {
+    align-self: center;
+    margin-top: 10px;
+    padding: 10px 20px;
+}
+
+.formFunc label {
+    margin-bottom: 4px;
+    text-align: left;
+    width: 90%;
+}
+
+.button {
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 0;
+    text-align: center;
+    width: 100px;
+}
+
+select[name="CourseID"] {
+    background-color: white;
+    border: 1px solid #869d9d;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    padding: 8px;
+    width: 80%;
+}
+
+.search-form {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0 1rem;
+}
+
+.search-form input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex-grow: 1;
+    padding: 0.5rem;
+}
+
+.search-form button {
+    background-color: #92b3a5;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
+.search-form button:hover {
+    background-color: #83a78d;
+}

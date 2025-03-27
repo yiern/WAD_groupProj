@@ -2,37 +2,40 @@
 <!DOCTYPE html>
 
 {% block title_block %}
-    {% if searchTitle %}
-        {{ searchTitle }}
+    {% if query %}
+        Search: {{ query }}
     {% else %}
-        Search
+        Search Notes
     {% endif %}
 {% endblock %}
 
 {% block header_block %}
-    {% if searchTitle %}
-        <h1>{{ searchTitle }}</h1>
-    {% else %}
-        <h1>Search Title not found</h1>
-    {% endif %}
+    <h1>
+        {% if query %}
+            Search Results for "{{ query }}"
+        {% else %}
+            Search Notes
+        {% endif %}
+    </h1>
 {% endblock %}
 
 {% block body_block %}
-      
-    <div id="notesContent">
-
-        {% if searchResults%}
-            <h2>Maybe you want to find: </h2>
-            <br>
-            <ul>
-                {% for searchResult in searchResults %}
-                    <li></li><!--here links to different notes-->
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p><strong>No results found.</strong></p>
-        {% endif %}       
-    </div>
-    
+<div class="pageContent">
+    {% if searchResults %}
+        <h2>Found {{ searchResults.count }} note(s):</h2>
+        <ul>
+            {% for note in searchResults %}
+                <li>
+                    <a href="{% url 'rango:tNnote' note.NoteID %}">
+                        {{ note.Topics }} ({{ note.CourseID.CourseID }})
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% elif query %}
+        <p>No notes found matching "{{ query }}"</p>
+    {% else %}
+        <p>Enter a search term on the above search bar to find notes</p>
+    {% endif %}       
+</div>
 {% endblock %}
-
