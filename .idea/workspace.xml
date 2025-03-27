@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdd5f8f2-7460-4f5b-adbe-9d6d8dba406e" name="Changes" comment="Extended profile support modifications">
+    <list default="true" id="bdd5f8f2-7460-4f5b-adbe-9d6d8dba406e" name="Changes" comment="Landscaping and fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/rango/tNuser.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/tNuser.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rango/password_change.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/password_change.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rango/password_change_done.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/password_change_done.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +191,7 @@
       <workItem from="1743035739614" duration="16143000" />
       <workItem from="1743056896041" duration="1027000" />
       <workItem from="1743077771332" duration="135000" />
-      <workItem from="1743077945508" duration="5139000" />
+      <workItem from="1743077945508" duration="5817000" />
     </task>
     <task id="LOCAL-00001" summary="Remedial content (Course, searches, notes)">
       <option name="closed" value="true" />
@@ -257,7 +257,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743079919898</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Landscaping and fix">
+      <option name="closed" value="true" />
+      <created>1743083395375</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1743083395375</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,7 +306,8 @@
     <MESSAGE value=" Limit the number of password login errors" />
     <MESSAGE value="fix login" />
     <MESSAGE value="Extended profile support modifications" />
-    <option name="LAST_COMMIT_MESSAGE" value="Extended profile support modifications" />
+    <MESSAGE value="Landscaping and fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Landscaping and fix" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/WAD_groupProj$manage.coverage" NAME="manage Coverage Results" MODIFIED="1742181838469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
