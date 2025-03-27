@@ -4,10 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bdd5f8f2-7460-4f5b-adbe-9d6d8dba406e" name="Changes" comment="password changing done">
+    <list default="true" id="bdd5f8f2-7460-4f5b-adbe-9d6d8dba406e" name="Changes" comment="fix conflict">
+      <change afterPath="$PROJECT_DIR$/rango/migrations/0004_auto_20250327_0034.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/rango/tNbase.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/tNbase.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rango/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/rango/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/common.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/jsPages.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/jsPages.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/rango.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rango/tNcourse.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/tNcourse.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rango/tNindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/tNindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rango/tNlogin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/tNlogin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rango/tNnote.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/tNnote.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rango/tNnotes.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/tNnotes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/rango/tNregister.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/tNregister.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/rango/tNupload.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rango/tNupload.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,30 +65,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Django Server.WAD_groupProj.executor&quot;: &quot;Run&quot;,
-    &quot;Python.manage.executor&quot;: &quot;Run&quot;,
-    &quot;Python.populate_rango.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/keti010/Downloads/WAD_groupProj-main&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Django Server.WAD_groupProj.executor": "Run",
+    "Python.manage.executor": "Run",
+    "Python.populate_rango.executor": "Run",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
+    "git-widget-placeholder": "Merging main",
+    "last_opened_file_path": "C:/Users/keti010/Downloads/WAD_groupProj-main",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "aDefault",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\keti010\PycharmProjects\WAD_groupProj\static\javascript" />
@@ -192,7 +205,7 @@
       <workItem from="1743056896041" duration="1027000" />
       <workItem from="1743077771332" duration="135000" />
       <workItem from="1743077945508" duration="11511000" />
-      <workItem from="1743112164312" duration="324000" />
+      <workItem from="1743112164312" duration="4649000" />
     </task>
     <task id="LOCAL-00001" summary="Remedial content (Course, searches, notes)">
       <option name="closed" value="true" />
@@ -290,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743084859222</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fix conflict">
+      <option name="closed" value="true" />
+      <created>1743112736758</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1743112736758</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,14 +356,15 @@
     <MESSAGE value="password html done" />
     <MESSAGE value="Modify the page when you enter the wrong password" />
     <MESSAGE value="password changing done" />
-    <option name="LAST_COMMIT_MESSAGE" value="password changing done" />
+    <MESSAGE value="fix conflict" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix conflict" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="jinja2-line">
           <url>file://$PROJECT_DIR$/templates/rango/tNlogin.html</url>
-          <line>43</line>
+          <line>36</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

@@ -6,22 +6,29 @@
 {% endblock %}
 
 {% block header_block %}
-    <h1 id="tNicon">Unlock Knowledge Through <strong>Think</strong><em>Note</em></h1>    
+    <h1 class="tNicon">Unlock Knowledge Through <strong>Think</strong><em>Note</em></h1>    
 {% endblock %}
 
 {% block body_block %}
     <h2 id="slogan">Connecting Minds, Sharing Notes.</h2>
-    <br>
-    <div class="indexContent">
-        <h2>Recommended notes:</h2>
-        <p>There are no notes present.</p> 
-        
-        <h4>Text File Content for test</h4>
-        {% if file_content%}
-            <pre>{{ file_content }}</pre>
+    
+    <div id="indexContent" class="pageContent">
+        <h2>Most Popular Notes:</h2>
+        {% if top_notes %}
+            <ul>
+                {% for note in top_notes %}
+                    <li>
+                        <a href="{% url 'rango:tNnote' note.NoteID %}">
+                            {{ note.Topics }} ({{ note.CourseID.CourseID }}) - {{ note.views }} views
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>There are no notes present.</p> 
         {% endif %}
     </div>
-    <br>
+    
     <div class="sideBar">
         <h2>List of courses</h2>
         {% if courses %}
@@ -34,7 +41,5 @@
             <strong>There are no notes present.</strong>
         {% endif %}
     </div>
-   
-    <br>
 {% endblock %}
 

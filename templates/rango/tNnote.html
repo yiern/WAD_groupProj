@@ -2,12 +2,19 @@
 <!DOCTYPE html>
 
 {% block title_block %}
-    Note Title
+    {% if note %}
+        {{ note.Topics }}
+    {% else %}
+        Note Title
+    {% endif %}
 {% endblock %}
 
 {% block header_block %}
-    <h1>Note Title</h1>
-
+    {% if note %}
+        <h1>{{ note.Topics }}</h1>
+    {% else %}
+        <h1>Note Title</h1>
+    {% endif %}
 {% endblock %}
 
 {% block body_block %}
@@ -60,14 +67,10 @@
                 <li><a href = "{% url 'rango:tNlogin' %}">Want to edit this note as your own? Click here to login!</a></li>
             {% endif %}
         </ul>
-        
     </div>
+
     {% else %}
-        no note present
+        <p>No note present</p>
     {% endif %}
-
-
-
-    
 {% endblock %}
 

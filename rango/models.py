@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 
     
 class Students(models.Model):
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True,null=True)
     YearEnrolled = models.IntegerField()
     CurrentYearStudent = models.IntegerField(default= 1)
     user = models.OneToOneField(User, on_delete= models.CASCADE)
@@ -34,5 +33,13 @@ class Note(models.Model):
     NoteID = models.AutoField(primary_key=True)
     file = models.FileField(upload_to="Documents/")
     edited = models.IntegerField(null = True)
-    views = models.IntegerField(default=0)
+    views = models.PositiveIntegerField(default=0)
+    viewed_by = models.ManyToManyField(User, through='NoteView', related_name='viewed_notes')
  
+class NoteView(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    note = models.ForeignKey(Note, on_delete=models.CASCADE)
+    viewed_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'note')
