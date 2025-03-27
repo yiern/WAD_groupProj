@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 {% load rango_template_tags %}
 
 <!DOCTYPE html>
@@ -7,7 +7,7 @@
     <head>
         <meta charset="UTF-8" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.8/mammoth.browser.min.js"></script>
-        <title> 
+        <title>
             ThinkNote -
             {% block title_block %}
                 Default Page Title
@@ -22,21 +22,21 @@
     <body>
         <nav id="toolBar" aria-label="Navigation">
             <a class="tNicon" href="{% url 'rango:tNindex' %}"><strong>Think</strong><em>Note</em></a>
-            
+
             <form class="search-form" action="{% url 'rango:tNsearch' %}" method="get">
                 <input type="text" name="q" placeholder="Search notes..." aria-label="Search">
                 <button type="submit">Search</button>
             </form>
-            
+
             {% if user.is_authenticated %}
                 <p class="userLoginInfo">
-                    <a href="{% url 'rango:tNuser' %}">User Profile</a> / 
-                    <a href="{% url 'rango:logout' %}">Logout</a> 
+                    <a href="{% url 'rango:tNuser' %}">User Profile</a> /
+                    <a href="{% url 'rango:logout' %}">Logout</a>
                 </p>
             {% else %}
                 <p class="userLoginInfo">
-                    <a href="{% url 'rango:tNlogin' %}">Login</a> / 
-                    <a href="{% url 'rango:tNregister' %}">Register</a> 
+                    <a href="{% url 'rango:tNlogin' %}">Login</a> /
+                    <a href="{% url 'rango:tNregister' %}">Register</a>
                 </p>
             {% endif %}
         </nav>
