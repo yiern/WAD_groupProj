@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 
     
 class Students(models.Model):
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True)
     YearEnrolled = models.IntegerField()
     CurrentYearStudent = models.IntegerField(default= 1)
     user = models.OneToOneField(User, on_delete= models.CASCADE)
