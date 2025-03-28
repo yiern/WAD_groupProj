@@ -66,6 +66,8 @@ def serve_docx(request, NoteID):
         return HttpResponse("File not found", status=404)
 
 def tNnote(request, NoteID):
+    form = LikeForm()
+    liked = False
     note = get_object_or_404(Note, NoteID=NoteID)
 
     if request.user.is_authenticated:
@@ -76,8 +78,23 @@ def tNnote(request, NoteID):
                 note.save()
         except (AttributeError, TypeError):
             pass
-
-    return render(request, 'rango/tNnote.html', {'note': note})
+        liked = note.liked_by.filter(pk=request.user.pk).exists()
+        if request.method == 'POST':
+            if note.liked_by.filter(pk=request.user.pk).exists():
+                note.likes -= 1
+                note.liked_by.remove(request.user)
+                note.save()
+                liked = True
+                messages.success(request, 'Liked +1')
+            else:
+                note.likes += 1
+                note.liked_by.add(request.user)
+                note.save()
+                liked = False
+                messages.success(request, 'Disliked')
+            return redirect(reverse('rango:tNnote', kwargs={'NoteID': NoteID}))
+            
+    return render(request, 'rango/tNnote.html', {'note': note, 'liked': liked, 'form': form})
 
 def tNnotes(request,CourseID):
     notes_from_course = Note.objects.filter(CourseID = CourseID)
