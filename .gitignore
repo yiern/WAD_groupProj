@@ -16,6 +16,8 @@
 /readme.html
 /wp-*.php
 /xmlrpc.php
+__pycache__/
+*.pyc
 
 # Configuration
 wp-config.php
@@ -37,7 +39,7 @@ wp-config.php
 
 # Ignore the SQLite database file
 db.sqlite3
-
+*.sqlite3
 # All plugins
 #
 # Note: If you wish to whitelist plugins,

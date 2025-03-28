@@ -1,3 +1,10 @@
+:root {
+  --background-lightblue: #e8f0f5;
+  --gray-green: #607d8b;
+  --icon-purple: #8e44ad;
+  --icon-green: #2ecc71;
+  --pur-blue-black: #3c415c;
+}
 #slogan {
     color: black;
     font-family: Georgia, serif;

@@ -1,4 +1,7 @@
 import os
+from datetime import datetime as dt, timedelta
+
+
 from django.shortcuts import get_object_or_404, render
 from django.http import FileResponse, HttpResponse
 from rango.forms import *
@@ -6,56 +9,73 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages 
+from django.contrib import messages
 from tango_with_django_project import settings
 
 
 def tNindex(request):
     courses = Courses.objects.all()
     top_notes = Note.objects.order_by('-views')[:5]
-    
+
     return render(request, 'rango/tNindex.html', {
         'courses': courses,
         'top_notes': top_notes
     })
 
+
 def tNcourse(request):
     courses = Courses.objects.all()
-    
+
     return render(request, 'rango/tNcourse.html', {'courses': courses})
 
+
 def tNlogin(request):
-     # If the request is a HTTP POST, try to pull out the relevant information.
+    max_attempts = 5
+    lockout_time = timedelta(minutes=10)
+    error_message = None
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)
-       
-        if user:
-            # Is the account active? It could have been disabled.
-            if user.is_active:
-                # If the account is valid and active, we can log the user in.
-                # We'll send the user back to the homepage.
+        # Failure message in initialisation session
+        if 'login_attempts' not in request.session:
+            request.session['login_attempts'] = 0
+            request.session['last_attempt'] = str(dt.now())
+
+        # Lock time processing
+        last_attempt = dt.strptime(request.session['last_attempt'], '%Y-%m-%d %H:%M:%S.%f')
+        if request.session['login_attempts'] >= max_attempts:
+            if dt.now() - last_attempt < lockout_time:
+                error_message = "🚫 Too many failed attempts. Please try again later."
+            else:
+
+                request.session['login_attempts'] = 0
+
+        if not error_message:
+            user = authenticate(username=username, password=password)
+            if user and user.is_active:
                 login(request, user)
+                request.session['login_attempts'] = 0
                 return redirect(reverse('rango:tNindex'))
             else:
-                # An inactive account was used - no logging in!
-                return HttpResponse("Your ThinkNote account is disabled.")
-        else:
-            # Bad login details were provided. So we can't log the user in.
-            print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
-    else:
-        return render(request, 'rango/tNlogin.html')
-   
+                request.session['login_attempts'] += 1
+                request.session['last_attempt'] = str(dt.now())
+                attempts_left = max_attempts - request.session['login_attempts']
+                error_message = f"❌ Invalid login. Attempts left: {attempts_left}"
+
+    return render(request, 'rango/tNlogin.html', {
+            'error_message': error_message
+        })
+
+
 def serve_docx(request, NoteID):
     # Fetch the note object
     note = get_object_or_404(Note, NoteID=NoteID)
-    
+
     # Construct the file path
     file_path = os.path.join(settings.MEDIA_ROOT, note.file.name)
-    
+
     # Serve the file with the correct headers
     if os.path.exists(file_path):
         response = FileResponse(open(file_path, 'rb'))
@@ -64,6 +84,7 @@ def serve_docx(request, NoteID):
         return response
     else:
         return HttpResponse("File not found", status=404)
+
 
 def tNnote(request, NoteID):
     note = get_object_or_404(Note, NoteID=NoteID)
@@ -79,10 +100,12 @@ def tNnote(request, NoteID):
 
     return render(request, 'rango/tNnote.html', {'note': note})
 
-def tNnotes(request,CourseID):
-    notes_from_course = Note.objects.filter(CourseID = CourseID)
 
-    return render(request, 'rango/tNnotes.html', {'course_notes':notes_from_course})
+def tNnotes(request, CourseID):
+    notes_from_course = Note.objects.filter(CourseID=CourseID)
+
+    return render(request, 'rango/tNnotes.html', {'course_notes': notes_from_course})
+
 
 def tNregister(request):
     registered = False
@@ -95,13 +118,13 @@ def tNregister(request):
             # Save the User data
             user = user_form.save(commit=False)
             password = user_form.cleaned_data['password']
-            
-            user.set_password(password)  
+
+            user.set_password(password)
             user.save()
 
             # Save the Students data
             student = students_form.save(commit=False)
-            student.user = user  
+            student.user = user
             student.save()
 
             registered = True
@@ -118,37 +141,40 @@ def tNregister(request):
                            'students_form': students_form,
                            'registered': registered})
 
+
 def tNsearch(request):
     query = request.GET.get('q', '')  # Get the search query
     search_results = None
-    
+
     if query:
         search_results = Note.objects.filter(Topics__icontains=query)
-    
+
     return render(request, 'rango/tNsearch.html', {
         'searchResults': search_results,
         'searchTitle': f"Results for '{query}'",
         'query': query
     })
 
-@login_required
-def tNupload(request, NoteID = None):
 
+@login_required
+def tNupload(request, NoteID=None):
     if request.method == 'POST':
         # Print the contents of request.POST and request.FILES
-        
+
         if NoteID is not None:
             edit = True
-            creator = Note.objects.get(NoteID = NoteID)
-            form = NoteForm(request.POST, request.FILES, user=request.user.students, edited=NoteID, CourseID = creator.CourseID,)  # request.user.students is the Students instance
+            creator = Note.objects.get(NoteID=NoteID)
+            form = NoteForm(request.POST, request.FILES, user=request.user.students, edited=NoteID,
+                            CourseID=creator.CourseID, )  # request.user.students is the Students instance
 
         else:
             edit = False
             creator = None
-            form = NoteForm(request.POST, request.FILES, user=request.user.students, edited=NoteID)  # request.user.students is the Students instance
-        
+            form = NoteForm(request.POST, request.FILES, user=request.user.students,
+                            edited=NoteID)  # request.user.students is the Students instance
+
         if form.is_valid():
-            
+
             form.save()  # Save the form with the user field set
             messages.success(request, 'File uploaded successfully!')  # Add a success message
 
@@ -169,17 +195,44 @@ def tNupload(request, NoteID = None):
             edit = False
             creator = None
             form = NoteForm(user=request.user.students)
-    
-    return render(request, 'rango/tNupload.html', {'form': form, 'edit':edit, 'creator' : creator})
+
+    return render(request, 'rango/tNupload.html', {'form': form, 'edit': edit, 'creator': creator})
+
 
 def tNuser(request):
     notes = Note.objects.filter(user=request.user.id)
-    return render(request, 'rango/tNuser.html', {'notes': notes, 'username': request.user.username})
+    student = request.user.students
+    return render(request, 'rango/tNuser.html', {
+        'notes': notes,
+        'student': student,
+        'username': request.user.username
+    })
+
+@login_required
+def tNedit_profile(request):
+    student = request.user.students
+
+    if request.method == 'POST':
+        request.user.email = request.POST.get('email')
+        student.YearEnrolled = request.POST.get('YearEnrolled')
+        student.CurrentYearStudent = request.POST.get('CurrentYearStudent')
+
+        if 'profile_picture' in request.FILES:
+            student.profile_picture = request.FILES['profile_picture']
+
+        request.user.save()
+        student.save()
+        messages.success(request, "updated！")
+        return redirect('rango:tNuser')
+
+    return render(request, 'rango/tNedit_profile.html', {
+        'user': request.user,
+        'student': student,
+    })
+
+
 
 @login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('rango:tNindex'))
-
-
-

@@ -2,66 +2,54 @@
 {% load rango_template_tags %}
 
 <!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.8/mammoth.browser.min.js"></script>
+    <title>ThinkNote - {% block title_block %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jsPages.css' %}" />
+</head>
 
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.8/mammoth.browser.min.js"></script>
-        <title>
-            ThinkNote -
-            {% block title_block %}
-                Default Page Title
-            {% endblock %}
-        </title>
+<body>
+    <div id="toolBar">
+        <a id="tNicon" href="{% url 'rango:tNindex' %}"><strong>Think</strong><em>Note</em></a>
+        <form method="get" action="{% url 'rango:tNsearch' %}" class="search-bar">
+            <input type="text" name="q" placeholder="search..." class="search-input" />
+            <button type="submit" class="search-btn">🔍</button>
+        </form>
 
-        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}"/>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}"/>
-    </head>
+        {% if user.is_authenticated %}
+            <p class="useLoginfo">
+                <a href="{% url 'rango:tNuser' %}">User Profile</a> /
+                <a href="{% url 'rango:logout' %}">Logout</a>
+            </p>
+        {% else %}
+            <p class="useLoginfo">
+                <a href="{% url 'rango:tNlogin' %}">Login</a> /
+                <a href="{% url 'rango:tNregister' %}">Register</a>
+            </p>
+        {% endif %}
+    </div>
 
-    <body>
-        <nav id="toolBar" aria-label="Navigation">
-            <a class="tNicon" href="{% url 'rango:tNindex' %}"><strong>Think</strong><em>Note</em></a>
 
-            <form class="search-form" action="{% url 'rango:tNsearch' %}" method="get">
-                <input type="text" name="q" placeholder="Search notes..." aria-label="Search">
-                <button type="submit">Search</button>
-            </form>
+    <main>
+        <div>{% block header_block %}{% endblock %}</div>
+        <div>{% block body_block %}{% endblock %}</div>
+    </main>
 
+    <div class="footer">
+        <h2>Directory</h2>
+        <ul>
             {% if user.is_authenticated %}
-                <p class="userLoginInfo">
-                    <a href="{% url 'rango:tNuser' %}">User Profile</a> /
-                    <a href="{% url 'rango:logout' %}">Logout</a>
-                </p>
-            {% else %}
-                <p class="userLoginInfo">
-                    <a href="{% url 'rango:tNlogin' %}">Login</a> /
-                    <a href="{% url 'rango:tNregister' %}">Register</a>
-                </p>
+                <li><a href="{% url 'rango:tNupload' %}">Upload</a></li>
+                <li><a href="{% url 'rango:tNuser' %}">User profile</a></li>
             {% endif %}
-        </nav>
-
-        <header>
-            {%block header_block%}
-            {% endblock %}
-        </header>
-
-        <main>
-            {% block body_block %}
-            {% endblock %}
-        </div>
-
-        <div class="footer">
-            <h2>Directory</h2>
-            <ul>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'rango:tNupload' %}">Upload My Note</a></li>
-                    <li><a href="{% url 'rango:tNuser' %}">User profile</a></li>
-                {% endif %}
-                <li><a href="{% url 'rango:tNsearch' %}">Search</a></li>
-                <li><a href="{% url 'rango:tNcourse' %}">Courses</a></li>
-                <li><a href="{% url 'rango:tNindex' %}">Back to Home</a></li>
-            </ul>
-        </div>
-    </body>
+            <li><a href="{% url 'rango:tNsearch' %}">Search</a></li>
+            <li><a href="{% url 'rango:tNcourse' %}">Courses</a></li>
+            <li><a href="{% url 'rango:tNindex' %}">Back to Home</a></li>
+        </ul>
+    </div>
+</body>
 </html>
