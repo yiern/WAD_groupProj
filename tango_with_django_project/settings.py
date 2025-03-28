@@ -120,7 +120,7 @@ MEDIA_URL = '/media/'
 
 if ON_PYTHONANYWHERE:
     # PythonAnywhere specific settings
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 else:
     # Local development settings
