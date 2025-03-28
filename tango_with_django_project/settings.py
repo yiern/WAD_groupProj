@@ -28,7 +28,7 @@ SECRET_KEY = 'k2ud9)==@crh+_p@m((2+&g(-yiqsj-a*e6^d-tqou9-=0m+c6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['xiangbin.pythonanywhere.com']
+ALLOWED_HOSTS = ['xiangbin.pythonanywhere.com', '127.0.0.1']
 
 
 STATICFILES_DIRS = [

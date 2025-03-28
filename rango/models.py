@@ -36,11 +36,20 @@ class Note(models.Model):
     edited = models.IntegerField(null = True)
     views = models.PositiveIntegerField(default=0)
     viewed_by = models.ManyToManyField(User, through='NoteView', related_name='viewed_notes')
+    likes = models.PositiveIntegerField(default=0)
+    liked_by = models.ManyToManyField(User, through='NoteLiked', related_name='liked_notes')
  
 class NoteView(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     note = models.ForeignKey(Note, on_delete=models.CASCADE)
     viewed_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'note')
+
+class NoteLiked(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    note = models.ForeignKey(Note, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ('user', 'note')
