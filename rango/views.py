@@ -31,7 +31,7 @@ def tNcourse(request):
 
 def tNlogin(request):
     max_attempts = 5
-    lockout_time = timedelta(minutes=10)
+    lockout_time = timedelta(minutes=1)
     error_message = None
 
     if request.method == 'POST':
