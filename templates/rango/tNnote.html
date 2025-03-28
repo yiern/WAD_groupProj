@@ -63,8 +63,25 @@
             <li><a href = "{% url 'rango:serve_docx' note.NoteID %}">Download this note</a></li>
             {% if user.is_authenticated %}
                 <li><a href = "{% url 'rango:tNupload' note.NoteID %}">Edit this note</a></li>
+                <li>
+                    <form action="{% url 'rango:tNnote' note.NoteID %}" method="post">
+                        {% csrf_token %}
+                        {% if liked %}
+                            <input type="submit" value="Unlike" formmethod="post"> {{ note.likes }} likes <br>
+                        {% else %}
+                            <input type="submit" value="Like" formmethod="post"> {{ note.likes }} likes <br>
+                        {% endif %}
+                        {% if messages %}
+                            <div class="messages">
+                                {% for message in messages %}
+                                    <div class="alert alert-success">{{ message }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                </li>
             {% else %}
                 <li><a href = "{% url 'rango:tNlogin' %}">Want to edit this note as your own? Click here to login!</a></li>
+                <li>{{ note.Likes }} likes</li>
             {% endif %}
         </ul>
     </div>

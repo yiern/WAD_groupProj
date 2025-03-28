@@ -51,4 +51,7 @@ class NoteForm(forms.ModelForm):
         
         return instance
 
-    
+class LikeForm(forms.ModelForm):
+    class Meta:
+        model = NoteLiked
+        fields = ()
